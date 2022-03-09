@@ -52,12 +52,6 @@ persona2 = {
     }
 }
 
+//Invoco il metodo della funzione
 persona2.run();
 console.log(persona2.state);
-
-
-
-
-
-
-
