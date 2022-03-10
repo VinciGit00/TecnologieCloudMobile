@@ -4,9 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="AlterVista - Editor HTML">
   <title></title>
-<!--Compito: gestire il codice-->
-<!--Inserire dentro al box il lavoro-->
-<!--Stesso approccio della calcolatrice 3 ma bisogna gestire i contentitori-->
+
 <style>
 .box1 {width: 25%;
        height: 200px;
@@ -46,13 +44,12 @@
 </style>
 
 <script language="javascript">
-
-    /Identificatore del blocco HTML dove fare il rendering
+    //Identificatore del blocco HTML dove fare il rendering
     //Mi permette di fare un oggetto
-    function MioElenco(id_result, Elenco) {
+    function MioElenco(id_result) {
         this.id_result = id_result;
         this.contatore = 0;
-        this.Elenco = new Array(1);
+        this.Elenco = new Array(4);
 
         this.addToElenco = function (elemento) {
             this.Elenco[this.contatore] = elemento;
@@ -109,10 +106,7 @@
 
     }
 
-
-    var Elenco;
-
-    function Calcola(operazione, Elenchi) {
+    function Calcola(operazione, numero) {
         var v1 = parseInt(document.forms.myForm.op1.value);
         var v2 = parseInt(document.forms.myForm.op2.value);
         if (isNaN(v1))
@@ -120,8 +114,8 @@
         if (isNaN(v2))
             v2 = 0;
         var testo = operazione(v1, v2);
-        Elenco.addToElenco(testo);
-        Elenco.showElenco();
+        Elenco[numero].addToElenco(testo);
+        Elenco[numero].showElenco();
     }
 
     function Inizializza() {
@@ -137,10 +131,10 @@
     <form name="myForm" onsubmit="return false;">
      <input type="text" name="op1">
      <input type="text" name="op2">
-    <input type="submit" value="+" onclick="Calcola(fsomma, Elenchi[0]);">
-    <input type="submit" value="-" onclick="Calcola(fdifferenza, Elenchi[1]);">
-    <input type="submit" value="*" onclick="Calcola(fprodotto, Elenchi[2]);">
-    <input type="submit" value="/" onclick="Calcola(fdivisione, Elenchi[3]);">
+    <input type="submit" value="+" onclick="Calcola(fsomma, 0);">
+    <input type="submit" value="-" onclick="Calcola(fdifferenza, 1);">
+    <input type="submit" value="*" onclick="Calcola(fprodotto, 2);">
+    <input type="submit" value="/" onclick="Calcola(fdivisione, 3);">
     <input type="submit" value="Svuota" onclick="Svuota();">    
     </form>
     <br>

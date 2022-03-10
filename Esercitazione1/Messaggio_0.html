@@ -23,12 +23,23 @@
   }
 
 
+//Lo script viene chiamato quando c'è caricamento delle pagina
 function formatta() {
+    //Prende il nodo con quell'id
     var nodo = document.getElementById("area_risultato");
     //Chiama la funzione
 	nodo.innerHTML = gen_messaggio("Welcome everybody");
     return false;
 }
+
+//Alternativa -> Passo il parametro
+  function formatta2(id) {
+    //Prende il nodo con quell'id
+    var nodo = document.getElementById(id);
+    //Chiama la funzione
+    nodo.innerHTML = gen_messaggio("Welcome everybody");
+    return false;
+  }
 </script></head>
 
 
