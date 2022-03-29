@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <meta name="generator" content="AlterVista - Editor HTML">
+   <title></title>
+   <script type="text/javascript" src="JQ_Messaggio_files/jquery-2.js"></script>
+   <script language="javascript">
+      function gen_messaggio(message) {
+         var format = message.toUpperCase()
+         var size = 1 //go through the message, letter by letter 
+         var risultato = "";
+         for (i = 0; i < message.length; i++) {
+            var m = format.charAt(i).fontsize(size).bold();
+            risultato += m;
+            if (size < 7)
+               size++;
+            else
+               size = 1;
+         }
+         return risultato;
+      }
+      //Funzione formatta 
+      function formatta(event) {
+         //Prendo il ndoo che si chiama idtest
+         var msg = $("#TestoDaConvertire").eq(0).val(); //Ci restituisce il valore del campo
+         //gen_messaggio è una funzione
+         //#area_risultato è l'area dove mettere il risultato
+         $("#area_risultato").eq(0).html(gen_messaggio(msg));
+         event.preventDefault();//Si ferma l'esecuzione della gestione dell'evento
+      }
+
+      //Funzione che imposta il gestore dell'evento
+      var finit = function () {
+         ///set the event handler
+         $("#idpulsante").bind("click", formatta);
+      };
+      // Se c'è il dollaro indica cosa fare quando c'è il caricamento
+      $(finit);
+   </script>
+</head>
+
+<body>
+   <form name="myform">
+      <row>
+         <p id="TestoDaConvertire" id="idpulsante">Ciao</p>
+
+      </row>
+   </form>
+   <div>Risultato:</div>
+   <div id="area_risultato"><b>
+
+
+</body>
+
+</html>
