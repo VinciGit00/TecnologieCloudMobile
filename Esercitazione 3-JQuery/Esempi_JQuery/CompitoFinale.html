@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="AlterVista - Editor HTML" />
+    <title></title>
+    <script type="text/javascript" src="jquery-2.0.0.js"></script>
+    <script type="text/javascript">
+      var selectors = {
+        area: "#area_risultato",
+        pulsante_invio: "#id_invio",
+        cognome: "#id_cognome",
+        nome: "#id_nome",
+      };
+
+      //ID è singolare
+      //class no
+      function gen_messaggio(message) {
+        var format = message.toUpperCase();
+        var size = 1; //go through the message, letter by letter
+        var risultato = "";
+        for (i = 0; i < message.length; i++) {
+          var m = format.charAt(i).fontsize(size).bold();
+          risultato += m;
+          if (size < 7) size++;
+          else size = 1;
+        }
+        return risultato;
+      }
+
+      function MostraLista(lista) {
+        var area = $(selectors.area);
+        area.html("<p>Trovati " + lista.list.length + " Nominativi</p>");
+
+        var i;
+        for (i = 0; i < lista.list.length; i++) {
+          $(
+            //Questa è una stringa da appendere
+            "<div class ='elemento'>" +
+              lista.list[i].cognome +
+              " " +
+              lista.list[i].nome +
+              "</div>"
+          ).appendTo(selectors.area);
+        }
+        //class serve per usare il punto
+        //id serve per usare l'#
+        //Prendo ogni singolo elemento e lo passo e gli aggiungo la cliccabilità
+        $(".elemento").each(function (i, el) {
+          $(el).bind("click", function (event) {
+            //Imposto l'area del risultato
+            //Non devo usare l'#
+            //Fa una ricerca tramite l'id
+            document.getElementById("result_click").innerHTML = gen_messaggio(
+              //Devo convertire il file da dom in HTML
+              $(el).html()
+            );
+
+            //Metodo alternativo
+            //innerHTML serve per impostare l'area
+            /*$("#result_click")
+              .eq(0)
+              .html(gen_messaggio($(el).html()));*/
+            event.preventDefault();
+          });
+        });
+      }
+
+      function MostraErrore(errorThrown) {
+        var area = $(selectors.area);
+        area.html("<p>Spiacenti, errore rilevato: " + errorThrown + "</p>");
+      }
+
+      var success = function (data, textStatus, jqXHR) {
+        //Oggetto che deve essere mostrato
+        MostraLista(data);
+      };
+
+      var failure = function (jqXHR, textStatus, errorThrown) {
+        MostraErrore(errorThrown);
+      };
+
+      function AppendToQuery(old_query, name, val) {
+        var query;
+        if (old_query.length == 0) query = "?";
+        else query = old_query + "&";
+
+        query += name + "=" + val;
+
+        return query;
+      }
+
+      var eventHandler = function (event) {
+        //Ferma la presecuzione dell'evento sul pulsante
+        event.preventDefault();
+        var cg = $(selectors.cognome).val();
+        var no = $(selectors.nome).val();
+
+        var query = "";
+        //Serve per la gestione dei casi particolari
+        //Se c'è il cognome lo appendo al nome
+        //Se c'è il nome lo appendo al cognome
+        if (cg.length > 0) query = AppendToQuery(query, "cg", cg);
+        if (no.length > 0) query = AppendToQuery(query, "no", no);
+
+        //Chiamata della query
+        var ajaxConf = {
+          url:
+            "https://marcovinciguerra.altervista.org/TCM/Nominativi.php" +
+            query,
+          type: "GET",
+          dataType: "json",
+        };
+
+        //Oggetto che riceviamo
+        //Chiamata ajax
+        $.ajax(ajaxConf).done(success).fail(failure);
+      };
+
+      var finit = function () {
+        $(selectors.pulsante_invio).bind("click", eventHandler);
+      };
+
+      $(finit);
+    </script>
+  </head>
+
+  <body>
+    <form name="myform">
+      Cognome <input type="text" id="id_cognome" value="Rossi" /> <br />
+      e/o Nome <input type="text" id="id_nome" />
+      <input type="submit" value="Cerca" id="id_invio" />
+    </form>
+
+    <div id="result_click"></div>
+    <div id="area_risultato">
+      <p>Trovati 2 Nominativi</p>
+      <div>Rossi Paolo</div>
+      <div>Rossi Mario</div>
+    </div>
+  </body>
+</html>

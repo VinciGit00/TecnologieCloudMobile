@@ -20,8 +20,10 @@
         return risultato;
       }
 
+      //Al posto dell'onClick
       function formatta(event) {
-        var msg = $("#idtesto").eq(0).val();
+        //Prendo tramite l'id il valore tramite eq(0)
+        var msg = $("#idtesto").eq(0).html();
         $("#area_risultato").eq(0).html(gen_messaggio(msg));
         event.preventDefault();
       }
@@ -36,8 +38,10 @@
 
   <body>
     <form name="myform">
-      <input name="testo" type="text" id="idtesto" value="asdcas" />
+      <!--<input name="testo" type="text" id="idtesto" value="asdcas" />-->
       <input type="submit" value="Formatta" id="idpulsante" />
+
+      <div id="idtesto">Marco</div>
     </form>
     <div id="area_risultato">
       <b><font size="1">A</font></b

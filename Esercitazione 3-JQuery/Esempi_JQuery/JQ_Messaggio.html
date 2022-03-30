@@ -21,11 +21,19 @@
       }
 
       function formatta(event) {
-        var msg = $("#idtesto").eq(0).html();
+        var msg = $("#idtesto").eq(0).val();
         $("#area_risultato").eq(0).html(gen_messaggio(msg));
+
+        //Metodo alternativo
+        //innerHTML serve per impostare l'area
+        /* document.getElementById("area_risultato").innerHTML = gen_messaggio(
+              //Devo convertire il file da dom in HTML
+              $(el).html()
+            );*/
         event.preventDefault();
       }
 
+      //Si chiama il metodo quando viene caricata la pagina
       var finit = function () {
         ///set the event handler
         $("#idpulsante").bind("click", formatta);
@@ -36,10 +44,8 @@
 
   <body>
     <form name="myform">
-      <!--<input name="testo" type="text" id="idtesto" value="asdcas" />-->
+      <input name="testo" type="text" id="idtesto" value="asdcas" />
       <input type="submit" value="Formatta" id="idpulsante" />
-
-      <div id="idtesto">Marco</div>
     </form>
     <div id="area_risultato">
       <b><font size="1">A</font></b
