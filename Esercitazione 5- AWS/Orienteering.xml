@@ -5,7 +5,7 @@
             createTime="2011-07-31T22:46:33+01:00" 
             creator="Example Software"
             status="Complete">
-  <Event
+  <Event>
     <Name>Example event</Name>
     <StartTime>
       <Date>2011-07-30</Date>

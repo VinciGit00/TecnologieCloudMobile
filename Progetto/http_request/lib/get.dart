@@ -24,16 +24,19 @@ class _GetPageState extends State<GetPage> {
                 fontSize: 20,
                 fontWeight: FontWeight.w900
               ),),
-              FutureBuilder<String>(
-              future: getData(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return Text(snapshot.data!);
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
+              Padding(
+                padding: const EdgeInsets.only(top:10.0),
+                child: FutureBuilder<String>(
+                future: getData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Text(snapshot.data!);
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
             ),
+              ),
             ],
           ),
         ),

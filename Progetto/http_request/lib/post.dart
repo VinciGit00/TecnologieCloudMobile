@@ -68,7 +68,7 @@ class _postPageState extends State<postPage> {
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
                     alignLabelWithHint: false,
-                    hintText: 'Contenuto',
+                    hintText: 'Inserisci il contenuto della post',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
