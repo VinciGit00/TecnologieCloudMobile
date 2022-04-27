@@ -3,14 +3,16 @@
 A new Flutter project.
 
 ## Getting Started
+To run this app open VSC or android studio and run your android terminal. 
+Then open the main and run the code
 
-This project is a starting point for a Flutter application.
+## Images
 
-A few resources to get you started if this is your first Flutter project:
+<img width="350" alt="Schermata 2022-04-26 alle 21 35 43" src="https://user-images.githubusercontent.com/88108002/165382041-b1fe0d53-d275-4c57-85ae-0d9754c3b042.png">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img width="355" alt="Schermata 2022-04-26 alle 21 36 33" src="https://user-images.githubusercontent.com/88108002/165382037-b86d6b3a-892b-4fd3-aa6b-cb83f0996f6b.png">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="365" alt="Schermata 2022-04-26 alle 21 36 49" src="https://user-images.githubusercontent.com/88108002/165382016-cad1f568-f768-44de-ae16-e67afc3d7589.png">
+
+
+
