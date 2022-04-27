@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => GetPage()));
+                      MaterialPageRoute(builder: (context) => const GetPage()));
                     }, style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
