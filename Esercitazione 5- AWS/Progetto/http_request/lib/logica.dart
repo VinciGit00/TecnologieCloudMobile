@@ -4,17 +4,19 @@ Future<void> postData(String text) async {
 
   var response = await http.post(
     Uri.parse("https://61it38j72l.execute-api.us-east-1.amazonaws.com/postfunziona"),
-    headers: {"Access-Control-Allow-Origin": "*",
-"Access-Control-Allow-Credentials": "true", // Required for cookies, authorization headers with HTTPS
-  "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-  "Access-Control-Allow-Methods": "POST, OPTIONS"},
     body: text,
   );
 
   if (response.statusCode == 200) {
+    print("---------------------------------------------");
     print(response.body);
+    print("---------------------------------------------");
+
   } else {
+    print("---------------------------------------------");
     print(response.statusCode.toString());
+    print("---------------------------------------------");
+
   }
 }
 
