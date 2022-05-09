@@ -1,23 +1,37 @@
 import json
 import xml.etree.ElementTree as ET
 import boto3
-import base64
 
-s3 = boto3.resource('s3')
-DEFAULT_BUCKET = "bucketgare"
+DEFAULT_BUCKET = 'bucketgare'
 
 def lambda_handler(event, context):
 
-    #object_name = event['queryStringParameters']['id']
-    #object_name = object_name +'.xml'
-    object_name = "1859bf00-4cc7-4325-a347-174decbf284b.xml"
-    obj = s3.Object(DEFAULT_BUCKET, object_name)
-    #return obj
-    xmlstr = obj.get()['Body'].read()
-    return {
-            'headers': { "Content-Type": "text/xml" },
-            'statusCode': 200,
-            'body': base64.b64encode(xmlstr).decode('utf-8'),
-            'isBase64Encoded': True
+    # STEP 1: recupero della strina XML nel bucket S3 corrispondente all'ID passato come parametro
+    s3 = boto3.resource('s3')
+    try:
+        raceid = event['queryStringParameters']['id']  # è il parametro specificato con "?id=" in coda all'URL
+        bucket_name = DEFAULT_BUCKET
+        object_name = str(raceid) + '.xml'
+        obj = s3.Object(bucket_name, object_name)
+        xmlstr = obj.get()['Body'].read()
+    except s3.meta.client.exceptions.NoSuchKey:
+        return {
+            'statusCode': 404,
+            'body': json.dumps("ERROR: Race ID not found.")
         }
-   
+    except KeyError:
+        return {
+            'statusCode': 400,
+            'body': json.dumps("ERROR: id parameter not specified.")
+        }
+    
+    # parsing
+    root = ET.fromstring(xmlstr)
+    _ns = {'':'http://www.orienteering.org/datastandard/3.0'}
+    class_names_elements = root.findall('./ClassResult/Class/Name', _ns)
+    classes = [x.text for x in class_names_elements]
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps(classes)
+    }

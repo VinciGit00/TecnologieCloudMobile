@@ -10,7 +10,16 @@ def get_races():
     return json.loads(resp.replace("\'", '"'))
     
 def lambda_handler(event, context):
-    return {
+    
+    try:
+        return {
         'statusCode': 200,
         'result': get_races(),
     }
+    except Exception as e:
+        return {
+            'statusCode': 404,
+            'body': json.dumps("ERROR on fetching data")
+        }
+  
+ 
