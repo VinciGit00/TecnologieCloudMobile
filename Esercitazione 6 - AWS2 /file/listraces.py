@@ -11,7 +11,7 @@ def get_races():
     
 def lambda_handler(event, context):
     
-    try:
+    try: 
         return {
         'statusCode': 200,
         'result': get_races(),

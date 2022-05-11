@@ -2,27 +2,27 @@ import json
 import xml.etree.ElementTree as ET
 import boto3
 
-DEFAULT_BUCKET = 'bucketgare'
+BUCKET_S3 = 'bucketgare'
 
 def lambda_handler(event, context):
 
-    # STEP 1: recupero della strina XML nel bucket S3 corrispondente all'ID passato come parametro
-    s3 = boto3.resource('s3')
     try:
-        raceid = event['queryStringParameters']['id']  # è il parametro specificato con "?id=" in coda all'URL
-        bucket_name = DEFAULT_BUCKET
+        s3 = boto3.resource('s3')
+        raceid = event['queryStringParameters']['id']  
+        bucket_name = BUCKET_S3
         object_name = str(raceid) + '.xml'
         obj = s3.Object(bucket_name, object_name)
         xmlstr = obj.get()['Body'].read()
+
     except s3.meta.client.exceptions.NoSuchKey:
         return {
             'statusCode': 404,
-            'body': json.dumps("ERROR: Race ID not found.")
+            'body': json.dumps("ERROR: Race ID not found")
         }
     except KeyError:
         return {
             'statusCode': 400,
-            'body': json.dumps("ERROR: id parameter not specified.")
+            'body': json.dumps("ERROR: id parameter not specified")
         }
     
     # parsing
