@@ -26,19 +26,20 @@ class _postPageState extends State<postPage> {
                 )
               : IconButton(
                   onPressed: () async {
-                    if(_controller.text!="") {
-                        setState(() {
-                       _isLoading = true;
+                    if (_controller.text != "") {
+                      setState(() {
+                        _isLoading = true;
                       });
                       await postData(_controller.text);
                       Navigator.pop(context);
                       _isLoading = false;
-                      } else {
-                        const snackBar = SnackBar(
-                          content: Text('Devi inserire i dati prima di fare una POST!'),
+                    } else {
+                      const snackBar = SnackBar(
+                        content: Text(
+                            'Devi inserire i dati prima di fare una POST!'),
                       );
 
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
                   },
                   icon: const Icon(Icons.send),
