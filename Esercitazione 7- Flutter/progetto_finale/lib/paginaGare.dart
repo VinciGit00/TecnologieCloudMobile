@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:progetto_finale/singolo.dart';
+import 'Widget semplici/widgetgare.dart';
 
 class PaginaGare extends StatefulWidget {
   PaginaGare({Key? key}) : super(key: key);
@@ -16,10 +18,10 @@ class _PaginaGareState extends State<PaginaGare> {
           appBar: AppBar(
             title: const Text("Gara"),
             bottom: const TabBar(tabs: [
-              const Tab(
+              Tab(
                 text: "Categoria",
               ),
-              const Tab(
+              Tab(
                 text: "Club",
               )
             ]),
@@ -35,53 +37,13 @@ class _PaginaGareState extends State<PaginaGare> {
                     margin: const EdgeInsets.all(10),
                     padding: const EdgeInsets.all(5),
                     child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PaginaGare()));
-                      },
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 2.0, top: 1, bottom: 4),
-                            child: Row(
-                              children: [
-                                const Text(
-                                  'Nome categoria',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 2.0, top: 10),
-                            child: Row(
-                              children: [
-                                const Text(
-                                  'Dislivello:',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
-                                  child: const Text(
-                                    'Distanza:',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SingoloGiocatore()));
+                        },
+                        child: widgetGare()),
                     decoration: BoxDecoration(
                         color: Theme.of(context).accentColor,
                         border: Border.all(
