@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 Future<void> postData(String text) async {
   var response = await http.post(
     Uri.parse(
-        "https://61it38j72l.execute-api.us-east-1.amazonaws.com/postfunziona"),
+        "https://tkwzligz16.execute-api.us-east-1.amazonaws.com/POSTPROJECT"),
     body: text,
   );
 
@@ -21,7 +21,7 @@ Future<void> postData(String text) async {
 Future<String> getData() async {
   var response = await http.get(
     Uri.parse(
-        "https://y3od21zbh9.execute-api.us-east-1.amazonaws.com/test/customer"),
+        "https://ug23pnnj6b.execute-api.us-east-1.amazonaws.com/GETPROJECT"),
     headers: {"authorizationToken": 'abc123'},
   );
 
