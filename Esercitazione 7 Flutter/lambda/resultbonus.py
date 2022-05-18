@@ -18,10 +18,10 @@ def lambda_handler(event, context):
         
         root = ET.fromstring(response)
         _ns = {'':'http://www.orienteering.org/datastandard/3.0'}
-        xpath_exp = './/PersonResult/Organisation[Id="' + str(org) + '"]/../Person/Name'
+        xpath_exp = './/PersonResult/Organisation[Id="' + str(org) + '"]/..'
         xpath_query = root.findall(xpath_exp, _ns)
-    
-        names = []
+
+        names = {}
         for x in xpath_query:
             id = x.find('.//Person/Id',_ns)
             family = x.find('.//Person/Name/Family',_ns)
@@ -33,10 +33,19 @@ def lambda_handler(event, context):
             score = x.find('.//Result/Score',_ns)
             time = x.find('.//Result/Time',_ns)
             position = x.find('.//Result/Position',_ns)
-            names.append(family.text + ' ' + given.text)
-            print(id.text + ' ' + family.text, ' ', given.text, ' ' + bib.text, ' ' + category.text, ' ' + status.text + ' ' + nat.text + ' ' + score.text + ' ' + time.text + ' ' + position.text)
             
-        names = list( dict.fromkeys(names)) #remove duplicates by turning into dic and back to list
+            names[id.text] = {
+                            "name" : family.text + ' ' + given.text,
+                            "category" : category.text,
+                            "id" : id.text,
+                            "status" : status.text,
+                            "nat" : nat.text,
+                            "score" : score.text,
+                            "time" : time.text,
+                            "bib" : bib.text,
+                            "position" : position.text
+                            
+                                }
         
         #return response
         
