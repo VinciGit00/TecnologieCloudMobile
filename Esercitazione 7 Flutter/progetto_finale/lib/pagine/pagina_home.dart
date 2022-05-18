@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:progetto_finale/logica/lambda_functions.dart';
+import 'package:progetto_finale/models/tile_gara_model.dart';
 import 'package:progetto_finale/widgets/bottom_bar.dart';
 import '../elementiDrawer/get.dart';
 import '../elementiDrawer/post.dart';
@@ -29,8 +31,12 @@ class _PaginaHomeState extends State<PaginaHome> {
             ListTile(
               title: const Text('Post'),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => postPage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => postPage(),
+                  ),
+                );
               },
             ),
             const Divider(
@@ -48,17 +54,31 @@ class _PaginaHomeState extends State<PaginaHome> {
       ),
 
       /// BODY
-      body: RefreshIndicator(
-        onRefresh: () => Future.delayed(const Duration(seconds: 1)),
-        child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) => TileGara(
-            data: "10-01-2000",
-            orarioPartenza: "17:39",
-            id: "hjj2jhjhj-jhjhj23",
-            nomeGara: "Nome Prima Gara",
-          ),
-        ),
+      body: FutureBuilder<List<TileGaraModel>>(
+        future: LambdaFunctions().listraces(),
+        builder: (context, asyncsnapshot) {
+          if (asyncsnapshot.connectionState == ConnectionState.done) {
+            print(asyncsnapshot.data);
+            if (asyncsnapshot.hasData) {
+              return RefreshIndicator(
+                onRefresh: () => Future.delayed(const Duration(seconds: 1)),
+                child: ListView.builder(
+                  itemCount: asyncsnapshot.data!.length,
+                  itemBuilder: (context, index) => TileGara(
+                    model: asyncsnapshot.data![index],
+                  ),
+                ),
+              );
+            }
+            return Center(
+              child: Text("Nessun Risultato Trovato"),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
 
       bottomNavigationBar: CustomBottomBar(),

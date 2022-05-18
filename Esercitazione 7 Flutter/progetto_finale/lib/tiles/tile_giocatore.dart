@@ -56,7 +56,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Text(
-                "Club: ${widget.nomeClub},",
+                "Club: ${widget.nomeClub}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),

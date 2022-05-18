@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progetto_finale/logica/lambda_functions.dart';
 
 class CustomBottomBar extends StatefulWidget {
   CustomBottomBar({Key? key}) : super(key: key);
@@ -12,7 +13,9 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       // TODO: refresh pagina
-      onTap: (_) {},
+      onTap: (_) {
+        LambdaFunctions().listraces();
+      },
       backgroundColor: Colors.red,
       items: [
         BottomNavigationBarItem(
