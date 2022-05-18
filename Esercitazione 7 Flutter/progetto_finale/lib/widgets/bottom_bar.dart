@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:progetto_finale/logica/lambda_functions.dart';
 
 class CustomBottomBar extends StatefulWidget {
   CustomBottomBar({Key? key}) : super(key: key);

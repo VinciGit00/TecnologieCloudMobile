@@ -21,6 +21,8 @@ class _TileClubState extends State<TileClub> {
         CupertinoPageRoute(
           builder: (context) => PaginaClassificaGiocatori(
             title: widget.model.nomeClub,
+            isCategoria: false,
+            id: widget.model.idClub,
           ),
         ),
       ),
@@ -47,12 +49,6 @@ class _TileClubState extends State<TileClub> {
                 widget.model.nomeClub,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
-            ),
-
-            // Nome categoria
-            Text(
-              "Categoria: ${widget.model.nomeCategoria}",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
 
             // Nazione

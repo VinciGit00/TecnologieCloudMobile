@@ -21,6 +21,8 @@ class _TileCategoriaState extends State<TileCategoria> {
         CupertinoPageRoute(
           builder: (context) => PaginaClassificaGiocatori(
             title: widget.model.nomeCategoria,
+            isCategoria: true,
+            id: widget.model.idCategoria,
           ),
         ),
       ),

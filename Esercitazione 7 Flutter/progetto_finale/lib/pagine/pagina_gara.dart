@@ -3,7 +3,6 @@ import 'package:progetto_finale/logica/lambda_functions.dart';
 import 'package:progetto_finale/models/tile_categoria_model.dart';
 import 'package:progetto_finale/models/tile_club_model.dart';
 import 'package:progetto_finale/widgets/bottom_bar.dart';
-
 import '../tiles/tile_categoria.dart';
 import '../tiles/tile_club.dart';
 
@@ -25,14 +24,16 @@ class _PaginaGaraState extends State<PaginaGara> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.nomeGara),
-          bottom: const TabBar(tabs: [
-            Tab(
-              text: "Categoria",
-            ),
-            Tab(
-              text: "Club",
-            )
-          ]),
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                text: "Categoria",
+              ),
+              Tab(
+                text: "Club",
+              )
+            ],
+          ),
         ),
         body: TabBarView(
           children: [

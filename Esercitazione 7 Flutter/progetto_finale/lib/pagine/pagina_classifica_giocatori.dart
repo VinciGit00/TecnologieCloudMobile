@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:progetto_finale/models/tile_giocatore_model.dart';
 import 'package:progetto_finale/tiles/tile_giocatore.dart';
 import 'package:progetto_finale/widgets/bottom_bar.dart';
-import '../tiles/tile_categoria.dart';
+import '../logica/lambda_functions.dart';
 
 class PaginaClassificaGiocatori extends StatefulWidget {
-  PaginaClassificaGiocatori({Key? key, required this.title}) : super(key: key);
+  PaginaClassificaGiocatori(
+      {Key? key,
+      required this.title,
+      required this.isCategoria,
+      required this.id})
+      : super(key: key);
+
   final String title;
+  // Indico se sto mostrando la lista di giocatori della categoria indicata (true) oppure
+  // del club indicato (false)
+  final bool isCategoria;
+  // id della categoria o del club
+  final String id;
 
   @override
   State<PaginaClassificaGiocatori> createState() =>
@@ -22,22 +34,34 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
           title: Text(widget.title),
         ),
         body:
-            // Tab Classifica per Categoria
-            RefreshIndicator(
-          onRefresh: () => Future.delayed(const Duration(seconds: 1)),
-          child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) => TileGiocatore(
-              codiceNazione: "ITA",
-              idGiocatore: "23423-23423-1232",
-              nomeGiocatore: "Piero Paolino",
-              score: "100",
-              status: "OK",
-              time: "00:10:16",
-              nomeClub: "Ferrati",
-              nomeCategoria: "Nome Prima Categoria",
-            ),
-          ),
+            // Classifica Giocatori
+            FutureBuilder<List<TileGiocatoreModel>>(
+          future: LambdaFunctions()
+              .listResults(widget.title, widget.id, widget.isCategoria),
+          builder: (context, asyncsnapshot) {
+            if (asyncsnapshot.connectionState == ConnectionState.done) {
+              if (asyncsnapshot.hasData) {
+                return RefreshIndicator(
+                  onRefresh: () => Future.delayed(
+                    const Duration(seconds: 1),
+                  ),
+                  child: ListView.builder(
+                    itemCount: asyncsnapshot.data!.length,
+                    itemBuilder: (context, index) => TileGiocatore(
+                      model: asyncsnapshot.data![index],
+                    ),
+                  ),
+                );
+              }
+              return Center(
+                child: Text("Nessun Risultato Trovato"),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ),
         bottomNavigationBar: CustomBottomBar(),
       ),

@@ -1,6 +1,7 @@
 import 'package:progetto_finale/models/tile_categoria_model.dart';
 import 'package:progetto_finale/models/tile_gara_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:progetto_finale/models/tile_giocatore_model.dart';
 import 'dart:convert';
 
 import '../models/tile_club_model.dart';
@@ -71,6 +72,40 @@ class LambdaFunctions {
       return listaClub;
     } else {
       print("ERRORE GET LIST CLUBS");
+      return [];
+    }
+  }
+
+  /// Ritorna lista dei partecipanti ad un club o ad una categoria.
+  ///
+  /// Il parametro [id] serve a specificare la categoria o club di cui si vogliono i risultati.
+  ///
+  /// Il parametro [isCategoria] serve a indicare se il risultato è nella lista categoria (true)
+  /// o in quella dei club (false).
+  ///
+  Future<List<TileGiocatoreModel>> listResults(
+      String idGara, String id, bool isCategoria) async {
+    List<TileGiocatoreModel> listaRisultati = [];
+    var uri;
+
+    // Controllo se voglio i risultati per categoria o per club
+    if (isCategoria) {
+      uri = await Uri.http("", "", {});
+    } else {
+      uri = await Uri.http("", "", {});
+    }
+
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      List<dynamic> listaRisultatiJson = jsonDecode(response.body)["result"];
+
+      for (Map<String, dynamic> i in listaRisultatiJson) {
+        listaRisultati.add(TileGiocatoreModel.fromJson(i, isCategoria));
+      }
+      return listaRisultati;
+    } else {
+      print("ERRORE GET LIST GIOCATORI");
       return [];
     }
   }
