@@ -6,6 +6,10 @@ import '../elementiDrawer/get.dart';
 import '../elementiDrawer/post.dart';
 import '../tiles/tile_gara.dart';
 
+/// Pagina principale iniziale.
+///
+/// In questa pagina viene visualizzata la lista delle gare attualmente attive.
+///
 class PaginaHome extends StatefulWidget {
   PaginaHome({Key? key}) : super(key: key);
 

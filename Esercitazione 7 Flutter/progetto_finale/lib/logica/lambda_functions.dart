@@ -39,6 +39,10 @@ class LambdaFunctions {
 
     final response = await http.get(uri);
 
+    print("/////////////////////////////");
+    print(jsonDecode(response.body));
+    print("/////////////////////////////");
+
     if (response.statusCode == 200) {
       List<dynamic> listaCategorieJson = jsonDecode(response.body)["result"];
 
@@ -53,21 +57,27 @@ class LambdaFunctions {
     }
   }
 
+  /// TODO  FIXARE ELABORAZIONE BODY RICHIESTA, NON  E' UNA LISTA MA UNA MAPPA!!!
   /// Funzione che ritorna la lista di tutti i club di una gara
   ///
-  Future<List<TileClubModel>> listClubs(String idGara, String idClub) async {
+  Future<List<TileClubModel>> listClubs(String idGara) async {
     List<TileClubModel> listaClub = [];
-    final uri = await Uri.http("prqldktz2g.execute-api.us-east-1.amazonaws.com",
-        "/lambdaBONUS", {"id": idGara, "organization": idClub});
+    final uri = await Uri.https(
+        "u4wfd8jmi1.execute-api.us-east-1.amazonaws.com",
+        "/listOrg",
+        {"id": idGara});
 
     final response = await http.get(uri);
 
-    if (response.statusCode == 200) {
-      List<dynamic> listaClubJson = jsonDecode(response.body)["result"];
+    print(jsonDecode(response.body));
 
-      for (Map<String, dynamic> i in listaClubJson) {
-        listaClub.add(TileClubModel.fromJson(i));
-      }
+    if (response.statusCode == 200) {
+      Map<String, dynamic> clubJson = jsonDecode(response.body)["result"];
+
+      clubJson.map((key, value) {
+        listaClub.add(TileClubModel.fromJson(value));
+        return MapEntry(key, value);
+      });
 
       return listaClub;
     } else {
@@ -90,9 +100,11 @@ class LambdaFunctions {
 
     // Controllo se voglio i risultati per categoria o per club
     if (isCategoria) {
-      uri = await Uri.http("", "", {});
+      uri = await Uri.http("ru4hppmqxg.execute-api.us-east-1.amazonaws.com",
+          "/results", {"id": idGara, "class": id});
     } else {
-      uri = await Uri.http("", "", {});
+      uri = await Uri.http(
+          "u4wfd8jmi1.execute-api.us-east-1.amazonaws.com", "/listOrg", {});
     }
 
     final response = await http.get(uri);

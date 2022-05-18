@@ -4,6 +4,11 @@ import 'package:progetto_finale/tiles/tile_giocatore.dart';
 import 'package:progetto_finale/widgets/bottom_bar.dart';
 import '../logica/lambda_functions.dart';
 
+/// Questa pagina mostra una classifica dei giocatori.
+///
+/// Questa pagina viene usata sia per mostrare la classifica dei giocatori per club
+/// sia la classifica dei giocatori per una ceerta categoria (di una certa gara).
+///
 class PaginaClassificaGiocatori extends StatefulWidget {
   PaginaClassificaGiocatori(
       {Key? key,

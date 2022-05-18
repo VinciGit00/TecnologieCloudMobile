@@ -6,6 +6,11 @@ import 'package:progetto_finale/widgets/bottom_bar.dart';
 import '../tiles/tile_categoria.dart';
 import '../tiles/tile_club.dart';
 
+/// Pagina associata a ciascuna gara.
+///
+/// Contiene una tabbar che permette di scegliere tra la visualizzazione della lista delle categorie
+/// per quella gara o dei club che partecipano a quella gara.
+///
 class PaginaGara extends StatefulWidget {
   PaginaGara({Key? key, required this.nomeGara, required this.idGara})
       : super(key: key);
@@ -37,7 +42,7 @@ class _PaginaGaraState extends State<PaginaGara> {
         ),
         body: TabBarView(
           children: [
-            // Tab Classifica per Categoria
+            // TAB LISTA CATEGORIE
             FutureBuilder<List<TileCategoriaModel>>(
               future: LambdaFunctions().listClasses(widget.idGara),
               builder: (context, asyncsnapshot) {
@@ -65,10 +70,9 @@ class _PaginaGaraState extends State<PaginaGara> {
               },
             ),
 
-            // Classifica Tab Club
+            // TAB LISTA CLUB
             FutureBuilder<List<TileClubModel>>(
-              // TODO ADD ID CLUB
-              future: LambdaFunctions().listClubs(widget.idGara, ""),
+              future: LambdaFunctions().listClubs(widget.idGara),
               builder: (context, asyncsnapshot) {
                 if (asyncsnapshot.connectionState == ConnectionState.done) {
                   if (asyncsnapshot.hasData) {
