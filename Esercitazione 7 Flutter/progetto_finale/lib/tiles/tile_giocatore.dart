@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/tile_giocatore_model.dart';
+
 class TileGiocatore extends StatefulWidget {
-  TileGiocatore(
-      {Key? key,
-      required this.codiceNazione,
-      required this.idGiocatore,
-      this.nomeClub = "",
-      this.nomeCategoria = "",
-      required this.nomeGiocatore,
-      required this.score,
-      required this.status,
-      required this.time})
-      : super(key: key);
-  final String nomeGiocatore;
-  final String nomeClub;
-  final String nomeCategoria;
-  final String idGiocatore;
-  final String status;
-  final String codiceNazione;
-  final String score;
-  final String time;
+  TileGiocatore({Key? key, required this.model}) : super(key: key);
+
+  final TileGiocatoreModel model;
 
   @override
   State<TileGiocatore> createState() => _TileGiocatoreState();
@@ -48,7 +34,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
           children: [
             // Nome Giocatore
             Text(
-              widget.nomeGiocatore,
+              widget.model.nomeGiocatore,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
 
@@ -56,7 +42,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Text(
-                "Club: ${widget.nomeClub}",
+                "Club: ${widget.model.nomeClub}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
@@ -65,7 +51,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
-                "ID: ${widget.idGiocatore}",
+                "ID: ${widget.model.idGiocatore}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
@@ -74,7 +60,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
-                "Status: ${widget.status}",
+                "Status: ${widget.model.status}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
@@ -83,7 +69,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
-                "Nazione: ${widget.codiceNazione}",
+                "Nazione: ${widget.model.nazione}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
@@ -92,7 +78,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
-                "Score: ${widget.score}",
+                "Score: ${widget.model.score}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
@@ -101,7 +87,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
-                "Nazione: ${widget.time}",
+                "Time: ${widget.model.time}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),

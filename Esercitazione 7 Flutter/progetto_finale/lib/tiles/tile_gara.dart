@@ -21,7 +21,10 @@ class _TileGaraState extends State<TileGara> {
       onTap: () => Navigator.push(
         context,
         CupertinoPageRoute(
-          builder: (context) => PaginaGara(nomeGara: widget.model.title),
+          builder: (context) => PaginaGara(
+            nomeGara: widget.model.title,
+            idGara: widget.model.id,
+          ),
         ),
       ),
       child: Container(

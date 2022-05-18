@@ -13,9 +13,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       // TODO: refresh pagina
-      onTap: (_) {
-        LambdaFunctions().listraces();
-      },
+      onTap: (_) {},
       backgroundColor: Colors.red,
       items: [
         BottomNavigationBarItem(

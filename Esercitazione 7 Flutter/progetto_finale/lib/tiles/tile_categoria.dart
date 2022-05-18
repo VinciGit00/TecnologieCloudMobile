@@ -2,16 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progetto_finale/pagine/pagina_classifica_giocatori.dart';
 
+import '../models/tile_categoria_model.dart';
+
 class TileCategoria extends StatefulWidget {
-  TileCategoria(
-      {Key? key,
-      required this.nomeCategoria,
-      required this.dislivello,
-      required this.distanza})
-      : super(key: key);
-  final String nomeCategoria;
-  final String dislivello;
-  final String distanza;
+  TileCategoria({Key? key, required this.model}) : super(key: key);
+  final TileCategoriaModel model;
 
   @override
   State<TileCategoria> createState() => _TileCategoriaState();
@@ -23,10 +18,9 @@ class _TileCategoriaState extends State<TileCategoria> {
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
-        // TODO: creare classifica giocatori  per  categoria
         CupertinoPageRoute(
           builder: (context) => PaginaClassificaGiocatori(
-            title: widget.nomeCategoria,
+            title: widget.model.nomeCategoria,
           ),
         ),
       ),
@@ -48,7 +42,7 @@ class _TileCategoriaState extends State<TileCategoria> {
           children: [
             // Nome categoria
             Text(
-              widget.nomeCategoria,
+              widget.model.nomeCategoria,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
 
@@ -60,7 +54,7 @@ class _TileCategoriaState extends State<TileCategoria> {
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
-                      "Dislivello: ${widget.dislivello}",
+                      "Dislivello: ${widget.model.dislivello}",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
@@ -74,7 +68,7 @@ class _TileCategoriaState extends State<TileCategoria> {
                     child: Row(
                       children: [
                         Text(
-                          "Distanza: ${widget.distanza}",
+                          "Distanza: ${widget.model.distanza}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 15),
                         ),

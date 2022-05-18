@@ -1,19 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:progetto_finale/models/tile_club_model.dart';
 import 'package:progetto_finale/pagine/pagina_classifica_giocatori.dart';
 
 class TileClub extends StatefulWidget {
-  TileClub(
-      {Key? key,
-      required this.nomeCategoria,
-      required this.nazione,
-      required this.idClub,
-      required this.nomeClub})
-      : super(key: key);
-  final String nomeCategoria;
-  final String nomeClub;
-  final String nazione;
-  final String idClub;
+  TileClub({Key? key, required this.model}) : super(key: key);
+
+  final TileClubModel model;
 
   @override
   State<TileClub> createState() => _TileClubState();
@@ -25,10 +18,9 @@ class _TileClubState extends State<TileClub> {
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
-        // TODO: creare classifica giocatori  per  categoria
         CupertinoPageRoute(
           builder: (context) => PaginaClassificaGiocatori(
-            title: widget.nomeClub,
+            title: widget.model.nomeClub,
           ),
         ),
       ),
@@ -52,14 +44,14 @@ class _TileClubState extends State<TileClub> {
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: Text(
-                widget.nomeClub,
+                widget.model.nomeClub,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
             ),
 
             // Nome categoria
             Text(
-              "Categoria: ${widget.nomeCategoria}",
+              "Categoria: ${widget.model.nomeCategoria}",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
 
@@ -67,7 +59,7 @@ class _TileClubState extends State<TileClub> {
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: Text(
-                "nazione: ${widget.nazione}",
+                "nazione: ${widget.model.nazione}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
@@ -78,7 +70,7 @@ class _TileClubState extends State<TileClub> {
               child: Row(
                 children: [
                   Text(
-                    "idClub: ${widget.idClub}",
+                    "idClub: ${widget.model.idClub}",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ],

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:progetto_finale/logica/lambda_functions.dart';
+import 'package:progetto_finale/models/tile_categoria_model.dart';
+import 'package:progetto_finale/models/tile_club_model.dart';
 import 'package:progetto_finale/widgets/bottom_bar.dart';
 
 import '../tiles/tile_categoria.dart';
 import '../tiles/tile_club.dart';
 
 class PaginaGara extends StatefulWidget {
-  PaginaGara({Key? key, required this.nomeGara}) : super(key: key);
+  PaginaGara({Key? key, required this.nomeGara, required this.idGara})
+      : super(key: key);
   final String nomeGara;
+  final String idGara;
 
   @override
   State<PaginaGara> createState() => _PaginaGaraState();
@@ -32,30 +37,60 @@ class _PaginaGaraState extends State<PaginaGara> {
         body: TabBarView(
           children: [
             // Tab Classifica per Categoria
-            RefreshIndicator(
-              onRefresh: () => Future.delayed(const Duration(seconds: 1)),
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) => TileCategoria(
-                  dislivello: "200m",
-                  distanza: "2540km",
-                  nomeCategoria: "Nome Prima Categoria",
-                ),
-              ),
+            FutureBuilder<List<TileCategoriaModel>>(
+              future: LambdaFunctions().listClasses(widget.idGara),
+              builder: (context, asyncsnapshot) {
+                if (asyncsnapshot.connectionState == ConnectionState.done) {
+                  if (asyncsnapshot.hasData) {
+                    return RefreshIndicator(
+                      onRefresh: () =>
+                          Future.delayed(const Duration(seconds: 1)),
+                      child: ListView.builder(
+                        itemCount: asyncsnapshot.data!.length,
+                        itemBuilder: (context, index) => TileCategoria(
+                          model: asyncsnapshot.data![index],
+                        ),
+                      ),
+                    );
+                  }
+                  return Center(
+                    child: Text("Nessun Risultato Trovato"),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
             ),
 
             // Classifica Tab Club
-            RefreshIndicator(
-              onRefresh: () => Future.delayed(const Duration(seconds: 1)),
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) => TileClub(
-                  nomeClub: "Nome Club",
-                  nazione: "Italia",
-                  idClub: "1212-23432-123123",
-                  nomeCategoria: "Categoria del Club",
-                ),
-              ),
+            FutureBuilder<List<TileClubModel>>(
+              // TODO ADD ID CLUB
+              future: LambdaFunctions().listClubs(widget.idGara, ""),
+              builder: (context, asyncsnapshot) {
+                if (asyncsnapshot.connectionState == ConnectionState.done) {
+                  if (asyncsnapshot.hasData) {
+                    return RefreshIndicator(
+                      onRefresh: () =>
+                          Future.delayed(const Duration(seconds: 1)),
+                      child: ListView.builder(
+                        itemCount: asyncsnapshot.data!.length,
+                        itemBuilder: (context, index) => TileClub(
+                          model: asyncsnapshot.data![index],
+                        ),
+                      ),
+                    );
+                  }
+                  return Center(
+                    child: Text("Nessun Risultato Trovato"),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
             ),
           ],
         ),

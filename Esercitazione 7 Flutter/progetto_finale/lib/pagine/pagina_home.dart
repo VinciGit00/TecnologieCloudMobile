@@ -58,10 +58,11 @@ class _PaginaHomeState extends State<PaginaHome> {
         future: LambdaFunctions().listraces(),
         builder: (context, asyncsnapshot) {
           if (asyncsnapshot.connectionState == ConnectionState.done) {
-            print(asyncsnapshot.data);
             if (asyncsnapshot.hasData) {
               return RefreshIndicator(
-                onRefresh: () => Future.delayed(const Duration(seconds: 1)),
+                onRefresh: () => Future.delayed(
+                  const Duration(seconds: 1),
+                ),
                 child: ListView.builder(
                   itemCount: asyncsnapshot.data!.length,
                   itemBuilder: (context, index) => TileGara(
