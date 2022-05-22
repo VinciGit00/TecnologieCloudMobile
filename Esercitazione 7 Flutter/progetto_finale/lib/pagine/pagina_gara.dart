@@ -28,7 +28,6 @@ class _PaginaGaraState extends State<PaginaGara> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.nomeGara),
-<<<<<<< Updated upstream
           bottom: const TabBar(
             tabs: [
               Tab(
@@ -39,17 +38,6 @@ class _PaginaGaraState extends State<PaginaGara> {
               )
             ],
           ),
-=======
-          backgroundColor: Theme.of(context).primaryColor,
-          bottom: const TabBar(tabs: [
-            Tab(
-              text: "Categoria",
-            ),
-            Tab(
-              text: "Club",
-            )
-          ]),
->>>>>>> Stashed changes
         ),
         body: TabBarView(
           children: [

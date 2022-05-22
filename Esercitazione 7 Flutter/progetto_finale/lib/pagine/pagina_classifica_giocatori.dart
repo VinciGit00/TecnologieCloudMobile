@@ -37,7 +37,6 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
           backgroundColor: Theme.of(context).primaryColor,
         ),
         body:
-<<<<<<< Updated upstream
             // Classifica Giocatori
             FutureBuilder<List<TileGiocatoreModel>>(
           future: LambdaFunctions().listResults(widget.idGara, widget.id, widget.isCategoria),
@@ -66,25 +65,6 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
               );
             }
           },
-=======
-            // Tab Classifica per Categoria
-            RefreshIndicator(
-          color: Colors.red,
-          onRefresh: () => Future.delayed(const Duration(seconds: 1)),
-          child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) => TileGiocatore(
-              codiceNazione: "ITA",
-              idGiocatore: "23423-23423-1232",
-              nomeGiocatore: "Piero Paolino",
-              score: "100",
-              status: "OK",
-              time: "00:10:16",
-              nomeClub: "Ferrati",
-              nomeCategoria: "Nome Prima Categoria",
-            ),
-          ),
->>>>>>> Stashed changes
         ),
         bottomNavigationBar: CustomBottomBar(),
       ),
