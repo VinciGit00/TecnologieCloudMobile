@@ -17,6 +17,7 @@ class _postPageState extends State<postPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Post data"),
+        backgroundColor: Theme.of(context).primaryColor,
         actions: [
           _isLoading
               ? const Center(

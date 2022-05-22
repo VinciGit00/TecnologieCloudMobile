@@ -14,6 +14,7 @@ class _GetPageState extends State<GetPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Get data"),
+          backgroundColor: Theme.of(context).primaryColor,
         ),
         body: SingleChildScrollView(
           child: Container(
