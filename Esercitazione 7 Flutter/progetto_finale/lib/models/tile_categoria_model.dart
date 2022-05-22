@@ -13,9 +13,10 @@ class TileCategoriaModel {
 
   factory TileCategoriaModel.fromJson(Map<String, dynamic> json) {
     return TileCategoriaModel(
-        nomeCategoria: json[""],
-        dislivello: "",
-        distanza: json[""],
-        idCategoria: json[""]);
+      nomeCategoria: json["name"],
+      dislivello: json["climb"],
+      distanza: json["length"],
+      idCategoria: json["id"],
+    );
   }
 }

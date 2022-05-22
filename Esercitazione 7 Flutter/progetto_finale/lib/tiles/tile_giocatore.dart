@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../models/tile_giocatore_model.dart';
 
 class TileGiocatore extends StatefulWidget {
-  TileGiocatore({Key? key, required this.model}) : super(key: key);
+  TileGiocatore({Key? key, required this.model, required this.isCategoria}) : super(key: key);
 
   final TileGiocatoreModel model;
+  final bool isCategoria;
 
   @override
   State<TileGiocatore> createState() => _TileGiocatoreState();
@@ -34,15 +35,15 @@ class _TileGiocatoreState extends State<TileGiocatore> {
           children: [
             // Nome Giocatore
             Text(
-              widget.model.nomeGiocatore,
+              widget.model.nomeGiocatore!,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
 
-            // NomeClub
+            // NomeClub / Categoria
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Text(
-                "Club: ${widget.model.nomeClub}",
+                widget.isCategoria ? "Club: ${widget.model.nomeClub}" : "Categoria: ${widget.model.nomeCategoria}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),

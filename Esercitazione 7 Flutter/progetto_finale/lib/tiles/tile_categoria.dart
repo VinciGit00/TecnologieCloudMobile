@@ -5,8 +5,10 @@ import 'package:progetto_finale/pagine/pagina_classifica_giocatori.dart';
 import '../models/tile_categoria_model.dart';
 
 class TileCategoria extends StatefulWidget {
-  TileCategoria({Key? key, required this.model}) : super(key: key);
+  TileCategoria({Key? key, required this.model, required this.idGara}) : super(key: key);
   final TileCategoriaModel model;
+
+  final String idGara;
 
   @override
   State<TileCategoria> createState() => _TileCategoriaState();
@@ -20,9 +22,10 @@ class _TileCategoriaState extends State<TileCategoria> {
         context,
         CupertinoPageRoute(
           builder: (context) => PaginaClassificaGiocatori(
+            idGara: widget.idGara,
             title: widget.model.nomeCategoria,
             isCategoria: true,
-            id: widget.model.idCategoria,
+            id: widget.model.nomeCategoria,
           ),
         ),
       ),
@@ -57,8 +60,7 @@ class _TileCategoriaState extends State<TileCategoria> {
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
                       "Dislivello: ${widget.model.dislivello}",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
 
@@ -71,8 +73,7 @@ class _TileCategoriaState extends State<TileCategoria> {
                       children: [
                         Text(
                           "Distanza: ${widget.model.distanza}",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ],
                     ),

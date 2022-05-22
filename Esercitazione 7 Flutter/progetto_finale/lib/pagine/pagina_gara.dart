@@ -12,8 +12,7 @@ import '../tiles/tile_club.dart';
 /// per quella gara o dei club che partecipano a quella gara.
 ///
 class PaginaGara extends StatefulWidget {
-  PaginaGara({Key? key, required this.nomeGara, required this.idGara})
-      : super(key: key);
+  PaginaGara({Key? key, required this.nomeGara, required this.idGara}) : super(key: key);
   final String nomeGara;
   final String idGara;
 
@@ -49,11 +48,13 @@ class _PaginaGaraState extends State<PaginaGara> {
                 if (asyncsnapshot.connectionState == ConnectionState.done) {
                   if (asyncsnapshot.hasData) {
                     return RefreshIndicator(
-                      onRefresh: () =>
-                          Future.delayed(const Duration(seconds: 1)),
+                      onRefresh: () => Future.delayed(
+                        const Duration(seconds: 1),
+                      ),
                       child: ListView.builder(
                         itemCount: asyncsnapshot.data!.length,
                         itemBuilder: (context, index) => TileCategoria(
+                          idGara: widget.idGara,
                           model: asyncsnapshot.data![index],
                         ),
                       ),
@@ -77,11 +78,13 @@ class _PaginaGaraState extends State<PaginaGara> {
                 if (asyncsnapshot.connectionState == ConnectionState.done) {
                   if (asyncsnapshot.hasData) {
                     return RefreshIndicator(
-                      onRefresh: () =>
-                          Future.delayed(const Duration(seconds: 1)),
+                      onRefresh: () => Future.delayed(
+                        const Duration(seconds: 1),
+                      ),
                       child: ListView.builder(
                         itemCount: asyncsnapshot.data!.length,
                         itemBuilder: (context, index) => TileClub(
+                          idGara: widget.idGara,
                           model: asyncsnapshot.data![index],
                         ),
                       ),
