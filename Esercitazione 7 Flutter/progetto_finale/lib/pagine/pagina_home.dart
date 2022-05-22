@@ -24,6 +24,7 @@ class _PaginaHomeState extends State<PaginaHome> {
       /// APP BAR
       appBar: AppBar(
         title: const Text("Lista gare"),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: Drawer(
         child: ListView(
@@ -58,6 +59,7 @@ class _PaginaHomeState extends State<PaginaHome> {
       ),
 
       /// BODY
+<<<<<<< Updated upstream
       body: FutureBuilder<List<TileGaraModel>>(
         future: LambdaFunctions().listraces(),
         builder: (context, asyncsnapshot) {
@@ -84,6 +86,20 @@ class _PaginaHomeState extends State<PaginaHome> {
             );
           }
         },
+=======
+      body: RefreshIndicator(
+        onRefresh: () => Future.delayed(const Duration(seconds: 1)),
+        color: Colors.red,
+        child: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) => TileGara(
+            data: "10-01-2000",
+            orarioPartenza: "17:39",
+            id: "hjj2jhjhj-jhjhj23",
+            nomeGara: "Nome Prima Gara",
+          ),
+        ),
+>>>>>>> Stashed changes
       ),
 
       bottomNavigationBar: CustomBottomBar(),
