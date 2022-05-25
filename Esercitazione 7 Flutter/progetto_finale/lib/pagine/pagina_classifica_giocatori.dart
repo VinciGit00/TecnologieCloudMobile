@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:progetto_finale/main.dart';
 import 'package:progetto_finale/models/tile_giocatore_model.dart';
 import 'package:progetto_finale/tiles/tile_giocatore.dart';
 import 'package:progetto_finale/widgets/bottom_bar.dart';
@@ -11,13 +10,7 @@ import '../logica/lambda_functions.dart';
 /// sia la classifica dei giocatori per una ceerta categoria (di una certa gara).
 ///
 class PaginaClassificaGiocatori extends StatefulWidget {
-  PaginaClassificaGiocatori(
-      {Key? key,
-      required this.title,
-      required this.isCategoria,
-      required this.idGara,
-      required this.id})
-      : super(key: key);
+  PaginaClassificaGiocatori({Key? key, required this.title, required this.isCategoria, required this.idGara, required this.id}) : super(key: key);
 
   final String title;
   // Indico se sto mostrando la lista di giocatori della categoria indicata (true) oppure
@@ -30,8 +23,7 @@ class PaginaClassificaGiocatori extends StatefulWidget {
   final String idGara;
 
   @override
-  State<PaginaClassificaGiocatori> createState() =>
-      _PaginaClassificaGiocatori();
+  State<PaginaClassificaGiocatori> createState() => _PaginaClassificaGiocatori();
 }
 
 class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
@@ -43,20 +35,11 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
         appBar: AppBar(
           title: Text(widget.title),
           backgroundColor: Theme.of(context).primaryColor,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            // ogni volta che esco dalla pagina pulisco la listaCategoria
-            onPressed: () {
-              listaGiocatori.clear();
-              Navigator.pop(context);
-            },
-          ),
         ),
         body:
             // Classifica Giocatori
             FutureBuilder<List<TileGiocatoreModel>>(
-          future: LambdaFunctions()
-              .listResults(widget.idGara, widget.id, widget.isCategoria),
+          future: LambdaFunctions().listResults(widget.idGara, widget.id, widget.isCategoria),
           builder: (context, asyncsnapshot) {
             if (asyncsnapshot.connectionState == ConnectionState.done) {
               if (asyncsnapshot.hasData) {
@@ -67,11 +50,14 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
                   child: ListView.builder(
                     itemCount: asyncsnapshot.data!.length,
                     itemBuilder: (context, index) {
-                      print(listaGiocatori.length);
-                      if (!listaGiocatori
-                          .contains(asyncsnapshot.data![index].idGiocatore)) {
-                        listaGiocatori
-                            .add(asyncsnapshot.data![index].idGiocatore!);
+                      return TileGiocatore(
+                        model: asyncsnapshot.data![index],
+                        isCategoria: widget.isCategoria,
+                      );
+
+                      /*              print(listaGiocatori.length);
+                      if (!listaGiocatori.contains(asyncsnapshot.data![index].idGiocatore)) {
+                        listaGiocatori.add(asyncsnapshot.data![index].idGiocatore!);
                         return TileGiocatore(
                           isNew: true,
                           model: asyncsnapshot.data![index],
@@ -84,6 +70,7 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
                           isCategoria: widget.isCategoria,
                         );
                       }
+ */
                     },
                   ),
                 );

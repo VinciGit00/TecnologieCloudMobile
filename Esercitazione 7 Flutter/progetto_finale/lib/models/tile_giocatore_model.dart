@@ -10,9 +10,11 @@ class TileGiocatoreModel {
   final String? time;
   final int? rank;
   final String? numeroMaglia;
+  late bool isNew;
 
   TileGiocatoreModel(
       {this.nomeCategoria,
+      this.isNew = false,
       this.nomeClub,
       this.nomeGiocatore,
       this.idGiocatore,
@@ -29,7 +31,7 @@ class TileGiocatoreModel {
   /// Il parametro [isCategoria] serve a indicare se il risultato è nella lista categoria (true)
   /// o in quella dei club (false)
   ///
-  factory TileGiocatoreModel.fromJson(Map<String, dynamic> json, bool isCategoria) {
+  factory TileGiocatoreModel.fromJson(Map<String, dynamic> json, bool isCategoria, {bool isNew = false}) {
     return TileGiocatoreModel(
       nomeCategoria: isCategoria ? null : json["category"],
       nomeClub: isCategoria ? json["club_name"] : null,
@@ -43,6 +45,7 @@ class TileGiocatoreModel {
       nazione: json["nat"],
       numeroMaglia: json["bib"],
       rank: json["position"],
+      isNew: isNew,
     );
   }
 }

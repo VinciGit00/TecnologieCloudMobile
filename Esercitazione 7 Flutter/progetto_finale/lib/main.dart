@@ -8,12 +8,12 @@ void main() {
 
 /// Liste usate per memorizzare i contenuti fetchati per ultimi
 /// Le utilizzo per capire quali sono i nuovi valori fetchati
-List<String> listaGare = [];
-List<String> listaCategorie = [];
-List<String> listaClub = [];
+List<String> listaGareOld = [];
+List<String> listaCategorieOld = [];
+List<String> listaClubOld = [];
 // lista usata sia per i giocatori della classifca per club che per giocatori per categoria
 // la lista si pulisce ogni volta che
-List<String> listaGiocatori = [];
+List<String> listaGiocatoriOld = [];
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

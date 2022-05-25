@@ -5,14 +5,11 @@ import 'package:progetto_finale/pagine/pagina_classifica_giocatori.dart';
 import '../models/tile_categoria_model.dart';
 
 class TileCategoria extends StatefulWidget {
-  TileCategoria(
-      {Key? key, required this.model, this.isNew = false, required this.idGara})
-      : super(key: key);
+  TileCategoria({Key? key, required this.model, required this.idGara}) : super(key: key);
 
   final TileCategoriaModel model;
 
   final String idGara;
-  final bool isNew;
 
   @override
   State<TileCategoria> createState() => _TileCategoriaState();
@@ -37,7 +34,7 @@ class _TileCategoriaState extends State<TileCategoria> {
         padding: EdgeInsets.all(5),
         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
         decoration: BoxDecoration(
-          color: widget.isNew ? Colors.yellow : Colors.white,
+          color: widget.model.isNew ? Colors.yellow : Colors.white,
           border: Border.all(
             color: Theme.of(context).primaryColor,
             width: 4,
@@ -65,8 +62,7 @@ class _TileCategoriaState extends State<TileCategoria> {
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
                       "Dislivello: ${widget.model.dislivello}",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
 
@@ -79,8 +75,7 @@ class _TileCategoriaState extends State<TileCategoria> {
                       children: [
                         Text(
                           "Distanza: ${widget.model.distanza}",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ],
                     ),

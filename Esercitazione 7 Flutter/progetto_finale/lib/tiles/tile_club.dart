@@ -4,14 +4,10 @@ import 'package:progetto_finale/models/tile_club_model.dart';
 import 'package:progetto_finale/pagine/pagina_classifica_giocatori.dart';
 
 class TileClub extends StatefulWidget {
-  TileClub(
-      {Key? key, required this.model, this.isNew = false, required this.idGara})
-      : super(key: key);
+  TileClub({Key? key, required this.model, required this.idGara}) : super(key: key);
 
   final TileClubModel model;
   final String idGara;
-
-  final bool isNew;
 
   @override
   State<TileClub> createState() => _TileClubState();
@@ -36,7 +32,7 @@ class _TileClubState extends State<TileClub> {
         padding: EdgeInsets.all(5),
         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
         decoration: BoxDecoration(
-          color: widget.isNew ? Colors.yellow : Colors.white,
+          color: widget.model.isNew ? Colors.yellow : Colors.white,
           border: Border.all(
             color: Theme.of(context).primaryColor,
             width: 4,
