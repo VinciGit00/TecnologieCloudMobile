@@ -139,7 +139,6 @@ class _PaginaGaraState extends State<PaginaGara> {
             ),
           ],
         ),
-        bottomNavigationBar: CustomBottomBar(),
       ),
     );
   }

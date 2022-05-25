@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progetto_finale/main.dart';
 import 'package:progetto_finale/models/tile_giocatore_model.dart';
 import 'package:progetto_finale/tiles/tile_giocatore.dart';
 import '../logica/lambda_functions.dart';
@@ -26,6 +27,14 @@ class PaginaClassificaGiocatori extends StatefulWidget {
 }
 
 class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
+  // pulisco lista giocatori old ogni volta che vado a visualizzare una  lista di risultati per categoria o club
+  // in questo modo nella lista giocatori old ho solo quelli inerenti a quel contesto e non anche quelli di altri club o categorie
+  @override
+  void initState() {
+    listaGiocatoriOld.clear();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -53,23 +62,6 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
                         model: asyncsnapshot.data![index],
                         isCategoria: widget.isCategoria,
                       );
-
-                      /*              print(listaGiocatori.length);
-                      if (!listaGiocatori.contains(asyncsnapshot.data![index].idGiocatore)) {
-                        listaGiocatori.add(asyncsnapshot.data![index].idGiocatore!);
-                        return TileGiocatore(
-                          isNew: true,
-                          model: asyncsnapshot.data![index],
-                          isCategoria: widget.isCategoria,
-                        );
-                      } else {
-                        return TileGiocatore(
-                          isNew: false,
-                          model: asyncsnapshot.data![index],
-                          isCategoria: widget.isCategoria,
-                        );
-                      }
- */
                     },
                   ),
                 );

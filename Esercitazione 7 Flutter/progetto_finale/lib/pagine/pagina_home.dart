@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progetto_finale/logica/lambda_functions.dart';
 import 'package:progetto_finale/models/tile_gara_model.dart';
-import 'package:progetto_finale/widgets/bottom_bar.dart';
 import '../elementiDrawer/get.dart';
 import '../elementiDrawer/post.dart';
 import '../tiles/tile_gara.dart';
