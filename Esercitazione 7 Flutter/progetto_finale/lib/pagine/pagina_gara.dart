@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:progetto_finale/logica/lambda_functions.dart';
 import 'package:progetto_finale/models/tile_categoria_model.dart';
 import 'package:progetto_finale/models/tile_club_model.dart';
-import 'package:progetto_finale/widgets/bottom_bar.dart';
 import '../tiles/tile_categoria.dart';
 import '../tiles/tile_club.dart';
 

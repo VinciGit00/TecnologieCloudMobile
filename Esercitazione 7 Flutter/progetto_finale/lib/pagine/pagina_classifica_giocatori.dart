@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progetto_finale/models/tile_giocatore_model.dart';
 import 'package:progetto_finale/tiles/tile_giocatore.dart';
-import 'package:progetto_finale/widgets/bottom_bar.dart';
 import '../logica/lambda_functions.dart';
 
 /// Questa pagina mostra una classifica dei giocatori.
@@ -85,7 +84,6 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
             }
           },
         ),
-        bottomNavigationBar: CustomBottomBar(),
       ),
     );
   }

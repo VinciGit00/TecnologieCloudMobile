@@ -103,10 +103,13 @@ class LambdaFunctions {
 
       var isListaClubOldEmpty = listaClubOld.isEmpty;
       keyList.forEach((element) {
-        if (clubJson[element] == null) {
+        // eseguo dei controlli sul numero di chiavi del json
+        if (clubJson[element] == null || clubJson[element]!.keys.length != 3) {
           return;
         }
-        var model = TileClubModel.fromJson(clubJson[element]);
+
+        var model = TileClubModel.fromJson(clubJson[element]!);
+
         listaClub.add(model);
 
         if (listaClubOld.contains(model.idClub)) {
@@ -148,18 +151,24 @@ class LambdaFunctions {
 
     final response = await http.get(uri);
 
+    print(response.body);
+
     if (response.statusCode == 200) {
       Map<String, dynamic>? risultatiJson = jsonDecode(response.body);
 
       var keyList = risultatiJson!.keys.toList();
 
       var isListaGiocatoriOldEmpty = listaGiocatoriOld.isEmpty;
+
       keyList.forEach((element) {
         if (risultatiJson[element] == null) {
           return;
         }
+
+        print("aa");
         var model = TileGiocatoreModel.fromJson(risultatiJson[element], isCategoria);
         listaRisultati.add(model);
+        print("aa");
 
         if (listaGiocatoriOld.contains(model.idGiocatore)) {
           model.isNew = false;
@@ -175,7 +184,7 @@ class LambdaFunctions {
 
       return listaRisultati;
     } else {
-      print("ERRORE GET LIST CLUBS");
+      print("ERRORE GET LIST RESULTS");
       return [];
     }
   }

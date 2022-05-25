@@ -102,8 +102,6 @@ class _PaginaHomeState extends State<PaginaHome> {
           }
         },
       ),
-
-      bottomNavigationBar: CustomBottomBar(),
     );
   }
 }

@@ -8,7 +8,7 @@ class TileGiocatoreModel {
   final String? nazione;
   final String? score;
   final String? time;
-  final int? rank;
+  final dynamic rank;
   final String? numeroMaglia;
   late bool isNew;
 
@@ -39,8 +39,7 @@ class TileGiocatoreModel {
       idGiocatore: json["id"],
       status: json["status"],
       score: json["score"],
-      //time: json["time"],
-      time: null,
+      time: json["time"],
       timeBehind: null,
       nazione: json["nat"],
       numeroMaglia: json["bib"],
