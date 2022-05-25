@@ -28,7 +28,7 @@ def lambda_handler(event, context):
     # parsing
     root = ET.fromstring(xmlstr)
     _ns = {'':'http://www.orienteering.org/datastandard/3.0'}
-    class_names_elements = root.findall('./ClassResult/Class/Name', _ns)
+    class_names_elements = root.findall('./ClassResult/', _ns)
     classes = [x.text for x in class_names_elements]
 
     return {
