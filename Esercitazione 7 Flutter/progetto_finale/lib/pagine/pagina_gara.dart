@@ -8,7 +8,7 @@ import '../tiles/tile_club.dart';
 /// Pagina associata a ciascuna gara.
 ///
 /// Contiene una tabbar che permette di scegliere tra la visualizzazione della lista delle categorie
-/// per quella gara o dei club che partecipano a quella gara.
+/// o dei club che partecipano a quella gara.
 ///
 class PaginaGara extends StatefulWidget {
   PaginaGara({Key? key, required this.nomeGara, required this.idGara}) : super(key: key);
@@ -51,31 +51,13 @@ class _PaginaGaraState extends State<PaginaGara> {
                         const Duration(seconds: 1),
                       ),
                       child: ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 10.0),
                         itemCount: asyncsnapshot.data!.length,
                         itemBuilder: (context, index) {
                           return TileCategoria(
                             model: asyncsnapshot.data![index],
                             idGara: widget.idGara,
                           );
-
-                          // se la gara è già presene in quelle vecchie non faccio nulla
-                          // altrimenti cambio il colore in giallo
-                          /* if (!listaCategorie.contains(
-                                  asyncsnapshot.data![index].idCategoria) &&
-                              listaCategorie.isNotEmpty) {
-                            listaCategorie
-                                .add(asyncsnapshot.data![index].idCategoria);
-                            return TileCategoria(
-                              isNew: true,
-                              model: asyncsnapshot.data![index],
-                              idGara: widget.idGara,
-                            );
-                          } else {
-                            return TileCategoria(
-                              model: asyncsnapshot.data![index],
-                              idGara: widget.idGara,
-                            );
-                          } */
                         },
                       ),
                     );
@@ -102,27 +84,13 @@ class _PaginaGaraState extends State<PaginaGara> {
                         setState(() {});
                       },
                       child: ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 10.0),
                         itemCount: asyncsnapshot.data!.length,
                         itemBuilder: (context, index) {
                           return TileClub(
                             model: asyncsnapshot.data![index],
                             idGara: widget.idGara,
                           );
-
-/*                           if (!listaClub.contains(asyncsnapshot.data![index].idClub)) {
-                            listaClub.add(asyncsnapshot.data![index].idClub);
-                            return TileClub(
-                              isNew: true,
-                              model: asyncsnapshot.data![index],
-                              idGara: widget.idGara,
-                            );
-                          } else {
-                            return TileClub(
-                              model: asyncsnapshot.data![index],
-                              idGara: widget.idGara,
-                            );
-                          }
-  */
                         },
                       ),
                     );

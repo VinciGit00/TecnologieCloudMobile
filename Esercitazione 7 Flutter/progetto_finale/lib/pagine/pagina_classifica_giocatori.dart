@@ -7,7 +7,7 @@ import '../logica/lambda_functions.dart';
 /// Questa pagina mostra una classifica dei giocatori.
 ///
 /// Questa pagina viene usata sia per mostrare la classifica dei giocatori per club
-/// sia la classifica dei giocatori per una ceerta categoria (di una certa gara).
+/// sia la classifica dei giocatori per una certa categoria (di una certa gara).
 ///
 class PaginaClassificaGiocatori extends StatefulWidget {
   PaginaClassificaGiocatori({Key? key, required this.title, required this.isCategoria, required this.idGara, required this.id}) : super(key: key);
@@ -16,10 +16,8 @@ class PaginaClassificaGiocatori extends StatefulWidget {
   // Indico se sto mostrando la lista di giocatori della categoria indicata (true) oppure
   // del club indicato (false)
   final bool isCategoria;
-
   // id della categoria o del club
   final String id;
-
   final String idGara;
 
   @override
@@ -44,9 +42,9 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
           title: Text(widget.title),
           backgroundColor: Theme.of(context).primaryColor,
         ),
-        body:
-            // Classifica Giocatori
-            FutureBuilder<List<TileGiocatoreModel>>(
+
+        // Classifica Giocatori
+        body: FutureBuilder<List<TileGiocatoreModel>>(
           future: LambdaFunctions().listResults(widget.idGara, widget.id, widget.isCategoria),
           builder: (context, asyncsnapshot) {
             if (asyncsnapshot.connectionState == ConnectionState.done) {
@@ -56,6 +54,7 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
                     setState(() {});
                   },
                   child: ListView.builder(
+                    padding: const EdgeInsets.only(bottom: 10.0),
                     itemCount: asyncsnapshot.data!.length,
                     itemBuilder: (context, index) {
                       return TileGiocatore(

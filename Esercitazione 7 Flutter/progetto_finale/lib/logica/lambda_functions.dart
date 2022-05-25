@@ -8,6 +8,7 @@ import 'dart:convert';
 import '../models/tile_club_model.dart';
 
 class LambdaFunctions {
+  // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /// Funzione che ritorna la lista di tutte le gare attive al momento
   ///
   Future<List<TileGaraModel>> listraces() async {
@@ -24,20 +25,19 @@ class LambdaFunctions {
       var isListaGareOldEmpty = listaGareOld.isEmpty;
       for (Map<String, dynamic> i in listaGareJson) {
         var model = TileGaraModel.fromJson(i);
+        listaGare.add(model);
 
         // controllo per ciascuna gara presa dal fetch se è nuova oppure era già stata presa da un fetch precedente
         if (listaGareOld.contains(model.id)) {
           model.isNew = false;
         } else {
-          // se la entry è nuova, controllo se la lista iniziale è vuota, se lo è non coloro di giallo le nuove tile
+          // se la entry è nuova, controllo se questo è il primo fetch, se lo è non coloro di giallo le nuove tile
           if (!isListaGareOldEmpty) {
             model.isNew = true;
           }
           // aggiungo le nuove gare alla lista delle vecchie
           listaGareOld.add(model.id);
         }
-
-        listaGare.add(model);
       }
 
       return listaGare;
@@ -47,6 +47,7 @@ class LambdaFunctions {
     }
   }
 
+  // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /// Funzione che ritorna la lista di tutte le categorie di una gara
   ///
   Future<List<TileCategoriaModel>> listClasses(String idGara) async {
@@ -88,6 +89,7 @@ class LambdaFunctions {
     }
   }
 
+  // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /// Funzione che ritorna la lista di tutti i club di una gara
   ///
   Future<List<TileClubModel>> listClubs(String idGara) async {
@@ -104,7 +106,7 @@ class LambdaFunctions {
       var isListaClubOldEmpty = listaClubOld.isEmpty;
       keyList.forEach((element) {
         // eseguo dei controlli sul numero di chiavi del json
-        if (clubJson[element] == null || clubJson[element]!.keys.length != 3) {
+        if (clubJson[element] == null) {
           return;
         }
 
@@ -131,7 +133,8 @@ class LambdaFunctions {
     }
   }
 
-  /// Ritorna lista dei partecipanti ad un club o ad una categoria.
+  // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /// Ritorna classifica dei partecipanti appartenenti ad un club o ad una categoria.
   ///
   /// Il parametro [id] serve a specificare la categoria o club di cui si vogliono i risultati.
   ///
@@ -151,8 +154,6 @@ class LambdaFunctions {
 
     final response = await http.get(uri);
 
-    print(response.body);
-
     if (response.statusCode == 200) {
       Map<String, dynamic>? risultatiJson = jsonDecode(response.body);
 
@@ -165,10 +166,8 @@ class LambdaFunctions {
           return;
         }
 
-        print("aa");
         var model = TileGiocatoreModel.fromJson(risultatiJson[element], isCategoria);
         listaRisultati.add(model);
-        print("aa");
 
         if (listaGiocatoriOld.contains(model.idGiocatore)) {
           model.isNew = false;

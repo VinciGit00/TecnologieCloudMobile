@@ -8,7 +8,6 @@ class TileCategoria extends StatefulWidget {
   TileCategoria({Key? key, required this.model, required this.idGara}) : super(key: key);
 
   final TileCategoriaModel model;
-
   final String idGara;
 
   @override
