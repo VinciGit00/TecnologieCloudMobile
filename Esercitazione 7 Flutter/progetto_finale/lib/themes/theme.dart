@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final ThemeData dark = ThemeData(
-  brightness: Brightness.dark,
+  //brightness: Brightness.dark,
   appBarTheme: AppBarTheme(
     color: Color(0xFFEE4540),
   ),
@@ -11,12 +11,13 @@ final ThemeData dark = ThemeData(
   primaryColor: Color(0xFF801336),
   buttonTheme: ButtonThemeData(
     buttonColor: Colors.deepPurple, //  <-- dark color
-    textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
+    textTheme:
+        ButtonTextTheme.primary, //  <-- this auto selects the right color
   ),
 );
 
 final ThemeData white = ThemeData(
-  brightness: Brightness.light,
+  //brightness: Brightness.light,
   appBarTheme: const AppBarTheme(
     color: Color(0xFFD53E0F),
   ),
