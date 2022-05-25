@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progetto_finale/logica/lambda_functions.dart';
+import 'package:progetto_finale/main.dart';
 import 'package:progetto_finale/models/tile_gara_model.dart';
 import 'package:progetto_finale/widgets/bottom_bar.dart';
 import '../elementiDrawer/get.dart';
@@ -50,7 +51,8 @@ class _PaginaHomeState extends State<PaginaHome> {
             ListTile(
               title: const Text('Get'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => GetPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => GetPage()));
               },
             ),
           ],
@@ -64,14 +66,27 @@ class _PaginaHomeState extends State<PaginaHome> {
           if (asyncsnapshot.connectionState == ConnectionState.done) {
             if (asyncsnapshot.hasData) {
               return RefreshIndicator(
-                onRefresh: () => Future.delayed(
-                  const Duration(seconds: 1),
-                ),
+                // quando aggiorno la pagina con scroll, eseguo refresh pagina
+                onRefresh: () async {
+                  setState(() {});
+                },
                 child: ListView.builder(
                   itemCount: asyncsnapshot.data!.length,
-                  itemBuilder: (context, index) => TileGara(
-                    model: asyncsnapshot.data![index],
-                  ),
+                  itemBuilder: (context, index) {
+                    // se la gara non è già non presente in quelle vecchie cambio il colore in giallo
+                    if (!listaGare.contains(asyncsnapshot.data![index].id)) {
+                      // se la lista iniziale è vuota non mostro tutti i nuovi risultati in giallo
+                      listaGare.add(asyncsnapshot.data![index].id);
+                      return TileGara(
+                        isNew: true,
+                        model: asyncsnapshot.data![index],
+                      );
+                    } else {
+                      return TileGara(
+                        model: asyncsnapshot.data![index],
+                      );
+                    }
+                  },
                 ),
               );
             }

@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import '../models/tile_giocatore_model.dart';
 
 class TileGiocatore extends StatefulWidget {
-  TileGiocatore({Key? key, required this.model, required this.isCategoria}) : super(key: key);
+  TileGiocatore(
+      {Key? key,
+      required this.model,
+      this.isNew = false,
+      required this.isCategoria})
+      : super(key: key);
 
   final TileGiocatoreModel model;
   final bool isCategoria;
+  final bool isNew;
 
   @override
   State<TileGiocatore> createState() => _TileGiocatoreState();
@@ -21,6 +27,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
         padding: EdgeInsets.all(5),
         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
         decoration: BoxDecoration(
+          color: widget.isNew ? Colors.yellow : Colors.white,
           border: Border.all(
             color: Theme.of(context).primaryColor,
             width: 4,
@@ -43,7 +50,9 @@ class _TileGiocatoreState extends State<TileGiocatore> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Text(
-                widget.isCategoria ? "Club: ${widget.model.nomeClub}" : "Categoria: ${widget.model.nomeCategoria}",
+                widget.isCategoria
+                    ? "Club: ${widget.model.nomeClub}"
+                    : "Categoria: ${widget.model.nomeCategoria}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),

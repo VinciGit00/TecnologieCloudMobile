@@ -42,8 +42,6 @@ class LambdaFunctions {
     final response = await http.get(uri);
 
     if (response.statusCode == 200) {
-      print(jsonDecode(response.body));
-
       Map<String, dynamic>? categoriaJson = jsonDecode(response.body);
 
       var keyList = categoriaJson!.keys.toList();
@@ -109,10 +107,6 @@ class LambdaFunctions {
     List<TileGiocatoreModel> listaRisultati = [];
     var uri;
 
-    print("CLUB: " + id);
-    print("GARA: " + idGara);
-    print(isCategoria);
-
     // Controllo se voglio i risultati per categoria o per club
     if (isCategoria) {
       uri = Uri.https("ru4hppmqxg.execute-api.us-east-1.amazonaws.com",
@@ -124,28 +118,20 @@ class LambdaFunctions {
 
     final response = await http.get(uri);
 
-    print(response.body);
-
-    print(jsonDecode(response.body));
-
     if (response.statusCode == 200) {
       Map<String, dynamic>? risultatiJson = jsonDecode(response.body);
 
       var keyList = risultatiJson!.keys.toList();
-      print(keyList.length);
 
       keyList.forEach((element) {
-        print("IJIJ");
         if (risultatiJson[element] == null) {
           return;
         }
         listaRisultati.add(
           TileGiocatoreModel.fromJson(risultatiJson[element], isCategoria),
         );
-        print("CIOC");
       });
 
-      print(listaRisultati.length);
       return listaRisultati;
     } else {
       print("ERRORE GET LIST CLUBS");

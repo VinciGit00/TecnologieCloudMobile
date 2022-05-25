@@ -5,8 +5,9 @@ import 'package:progetto_finale/pagine/pagina_gara.dart';
 import '../models/tile_gara_model.dart';
 
 class TileGara extends StatefulWidget {
-  TileGara({Key? key, required this.model}) : super(key: key);
-
+  TileGara({Key? key, required this.model, this.isNew = false})
+      : super(key: key);
+  final bool isNew;
   final TileGaraModel model;
 
   @override
@@ -28,9 +29,10 @@ class _TileGaraState extends State<TileGara> {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.all(5),
         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+        padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
+          color: widget.isNew ? Colors.yellow : Colors.white,
           border: Border.all(
             color: Theme.of(context).primaryColor,
             width: 4,

@@ -6,6 +6,15 @@ void main() {
   runApp(const MyApp());
 }
 
+/// Liste usate per memorizzare i contenuti fetchati per ultimi
+/// Le utilizzo per capire quali sono i nuovi valori fetchati
+List<String> listaGare = [];
+List<String> listaCategorie = [];
+List<String> listaClub = [];
+// lista usata sia per i giocatori della classifca per club che per giocatori per categoria
+// la lista si pulisce ogni volta che
+List<String> listaGiocatori = [];
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
