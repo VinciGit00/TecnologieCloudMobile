@@ -12,7 +12,10 @@ class LambdaFunctions {
   Future<List<TileGaraModel>> listraces() async {
     List<TileGaraModel> listaGare = [];
 
-    final response = await http.get(Uri.parse("https://da9s2h285g.execute-api.us-east-1.amazonaws.com/test/list_races"));
+    final response = await http.get(
+      Uri.parse(
+          "https://da9s2h285g.execute-api.us-east-1.amazonaws.com/test/list_races"),
+    );
 
     if (response.statusCode == 200) {
       List<dynamic> listaGareJson = jsonDecode(response.body)["result"];
@@ -33,7 +36,8 @@ class LambdaFunctions {
   ///
   Future<List<TileCategoriaModel>> listClasses(String idGara) async {
     List<TileCategoriaModel> listaCategorie = [];
-    var uri = Uri.https("v5fiq86rb3.execute-api.us-east-1.amazonaws.com", "/list_classes", {'id': idGara});
+    var uri = Uri.https("v5fiq86rb3.execute-api.us-east-1.amazonaws.com",
+        "/list_classes", {'id': idGara});
 
     final response = await http.get(uri);
 
@@ -64,7 +68,10 @@ class LambdaFunctions {
   ///
   Future<List<TileClubModel>> listClubs(String idGara) async {
     List<TileClubModel> listaClub = [];
-    final uri = await Uri.https("u4wfd8jmi1.execute-api.us-east-1.amazonaws.com", "/listOrg", {"id": idGara});
+    final uri = await Uri.https(
+        "u4wfd8jmi1.execute-api.us-east-1.amazonaws.com",
+        "/listOrg",
+        {"id": idGara});
 
     final response = await http.get(uri);
 
@@ -97,7 +104,8 @@ class LambdaFunctions {
   /// Il parametro [isCategoria] serve a indicare se il risultato è nella lista categoria (true)
   /// o in quella dei club (false).
   ///
-  Future<List<TileGiocatoreModel>> listResults(String idGara, String id, bool isCategoria) async {
+  Future<List<TileGiocatoreModel>> listResults(
+      String idGara, String id, bool isCategoria) async {
     List<TileGiocatoreModel> listaRisultati = [];
     var uri;
 
@@ -107,9 +115,11 @@ class LambdaFunctions {
 
     // Controllo se voglio i risultati per categoria o per club
     if (isCategoria) {
-      uri = Uri.https("ru4hppmqxg.execute-api.us-east-1.amazonaws.com", "/results", {"id": idGara, "class": id});
+      uri = Uri.https("ru4hppmqxg.execute-api.us-east-1.amazonaws.com",
+          "/results", {"id": idGara, "class": id});
     } else {
-      uri = Uri.https("prqldktz2g.execute-api.us-east-1.amazonaws.com", "/lambdaBONUS", {"id": idGara, "organisation": id});
+      uri = Uri.https("prqldktz2g.execute-api.us-east-1.amazonaws.com",
+          "/lambdaBONUS", {"id": idGara, "organisation": id});
     }
 
     final response = await http.get(uri);
