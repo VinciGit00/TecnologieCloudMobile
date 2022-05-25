@@ -4,9 +4,10 @@ import 'package:progetto_finale/models/tile_club_model.dart';
 import 'package:progetto_finale/pagine/pagina_classifica_giocatori.dart';
 
 class TileClub extends StatefulWidget {
-  TileClub({Key? key, required this.model}) : super(key: key);
+  TileClub({Key? key, required this.model, required this.idGara}) : super(key: key);
 
   final TileClubModel model;
+  final String idGara;
 
   @override
   State<TileClub> createState() => _TileClubState();
@@ -20,6 +21,7 @@ class _TileClubState extends State<TileClub> {
         context,
         CupertinoPageRoute(
           builder: (context) => PaginaClassificaGiocatori(
+            idGara: widget.idGara,
             title: widget.model.nomeClub,
             isCategoria: false,
             id: widget.model.idClub,

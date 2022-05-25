@@ -10,23 +10,20 @@ import '../logica/lambda_functions.dart';
 /// sia la classifica dei giocatori per una ceerta categoria (di una certa gara).
 ///
 class PaginaClassificaGiocatori extends StatefulWidget {
-  PaginaClassificaGiocatori(
-      {Key? key,
-      required this.title,
-      required this.isCategoria,
-      required this.id})
-      : super(key: key);
+  PaginaClassificaGiocatori({Key? key, required this.title, required this.isCategoria, required this.idGara, required this.id}) : super(key: key);
 
   final String title;
   // Indico se sto mostrando la lista di giocatori della categoria indicata (true) oppure
   // del club indicato (false)
   final bool isCategoria;
+
   // id della categoria o del club
   final String id;
 
+  final String idGara;
+
   @override
-  State<PaginaClassificaGiocatori> createState() =>
-      _PaginaClassificaGiocatori();
+  State<PaginaClassificaGiocatori> createState() => _PaginaClassificaGiocatori();
 }
 
 class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
@@ -37,12 +34,12 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          backgroundColor: Theme.of(context).primaryColor,
         ),
         body:
             // Classifica Giocatori
             FutureBuilder<List<TileGiocatoreModel>>(
-          future: LambdaFunctions()
-              .listResults(widget.title, widget.id, widget.isCategoria),
+          future: LambdaFunctions().listResults(widget.idGara, widget.id, widget.isCategoria),
           builder: (context, asyncsnapshot) {
             if (asyncsnapshot.connectionState == ConnectionState.done) {
               if (asyncsnapshot.hasData) {
@@ -53,6 +50,7 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
                   child: ListView.builder(
                     itemCount: asyncsnapshot.data!.length,
                     itemBuilder: (context, index) => TileGiocatore(
+                      isCategoria: widget.isCategoria,
                       model: asyncsnapshot.data![index],
                     ),
                   ),

@@ -24,6 +24,7 @@ class _PaginaHomeState extends State<PaginaHome> {
       /// APP BAR
       appBar: AppBar(
         title: const Text("Lista gare"),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: Drawer(
         child: ListView(
@@ -49,8 +50,7 @@ class _PaginaHomeState extends State<PaginaHome> {
             ListTile(
               title: const Text('Get'),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GetPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => GetPage()));
               },
             ),
           ],

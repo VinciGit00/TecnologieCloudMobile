@@ -13,7 +13,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
     return BottomNavigationBar(
       // TODO: refresh pagina
       onTap: (_) {},
-      backgroundColor: Colors.red,
+      backgroundColor: Theme.of(context).primaryColor,
       items: [
         BottomNavigationBarItem(
           label: "",
