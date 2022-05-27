@@ -12,7 +12,8 @@ import '../tiles/tile_club.dart';
 /// per quella gara o dei club che partecipano a quella gara.
 ///
 class PaginaGara extends StatefulWidget {
-  PaginaGara({Key? key, required this.nomeGara, required this.idGara}) : super(key: key);
+  PaginaGara({Key? key, required this.nomeGara, required this.idGara})
+      : super(key: key);
   final String nomeGara;
   final String idGara;
 
@@ -28,6 +29,7 @@ class _PaginaGaraState extends State<PaginaGara> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.nomeGara),
+          backgroundColor: Theme.of(context).primaryColor,
           bottom: const TabBar(
             tabs: [
               Tab(
