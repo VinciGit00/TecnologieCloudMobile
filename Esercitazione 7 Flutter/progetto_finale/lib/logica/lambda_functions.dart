@@ -154,6 +154,9 @@ class LambdaFunctions {
 
     final response = await http.get(uri);
 
+    print(response.body);
+    print(response.statusCode);
+
     if (response.statusCode == 200) {
       Map<String, dynamic>? risultatiJson = jsonDecode(response.body);
 

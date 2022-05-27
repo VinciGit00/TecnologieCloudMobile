@@ -35,8 +35,7 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
+    return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),

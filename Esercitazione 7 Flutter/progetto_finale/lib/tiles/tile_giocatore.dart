@@ -31,7 +31,6 @@ class _TileGiocatoreState extends State<TileGiocatore> {
           ),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Nome Giocatore
@@ -40,58 +39,93 @@ class _TileGiocatoreState extends State<TileGiocatore> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
 
-            // NomeClub / Categoria
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: Text(
-                widget.isCategoria ? "Club: ${widget.model.nomeClub}" : "Categoria: ${widget.model.nomeCategoria}",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
-            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // NomeClub / Categoria
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10, top: 10),
+                        child: Text(
+                          widget.isCategoria ? "Club: ${widget.model.nomeClub}" : "Categoria: ${widget.model.nomeCategoria}",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
 
-            // ID
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Text(
-                "ID: ${widget.model.idGiocatore}",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
-            ),
+                      // ID
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          "ID: ${widget.model.idGiocatore}",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
 
-            // Status
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Text(
-                "Status: ${widget.model.status}",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
-            ),
+                      // Status
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Status: ${widget.model.status}",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
 
-            // Codice Nazione
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Text(
-                "Nazione: ${widget.model.nazione}",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
-            ),
+                      // Codice Nazione
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Nazione: ${widget.model.nazione}",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
 
-            // Score
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Text(
-                "Score: ${widget.model.score}",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
-            ),
+                      // Score
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Score: ${widget.model.score}",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
 
-            // Time
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Text(
-                "Time: ${widget.model.time}",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              ),
+                      // Time
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          "Time: ${widget.model.time}",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Maglietta
+                Container(
+                  height: 150,
+                  width: 150,
+                  margin: EdgeInsets.only(right: 20),
+                  child: FittedBox(
+                    fit: BoxFit.fill,
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: [
+                        Image.asset("assets/m1.png"),
+                        Positioned(
+                          top: 80,
+                          child: Text(
+                            widget.model.numeroMaglia.toString(),
+                            style: TextStyle(fontSize: 130),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
           ],
         ),

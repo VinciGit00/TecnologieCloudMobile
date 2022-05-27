@@ -47,9 +47,9 @@ class _PaginaGaraState extends State<PaginaGara> {
                 if (asyncsnapshot.connectionState == ConnectionState.done) {
                   if (asyncsnapshot.hasData) {
                     return RefreshIndicator(
-                      onRefresh: () => Future.delayed(
-                        const Duration(seconds: 1),
-                      ),
+                      onRefresh: () async {
+                        setState(() {});
+                      },
                       child: ListView.builder(
                         padding: const EdgeInsets.only(bottom: 10.0),
                         itemCount: asyncsnapshot.data!.length,
