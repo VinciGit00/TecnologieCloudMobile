@@ -15,11 +15,11 @@ class TileGrigliaPartenzaModel {
 
   factory TileGrigliaPartenzaModel.fromJson(Map<String, dynamic> json) {
     return TileGrigliaPartenzaModel(
-      istantePartenza: json["tempo"],
+      istantePartenza: json["start"],
       nomeGiocatore: json["name"],
       numeroMaglia: json["bib"],
       nazione: json["country"],
-      club: json["id"],
+      club: json["org"],
     );
   }
 }

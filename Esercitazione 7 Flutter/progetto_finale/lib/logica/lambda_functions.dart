@@ -203,7 +203,8 @@ class LambdaFunctions {
     List<TileGrigliaPartenzaModel> listaGrigliaPartenza = [];
     // In questo caso il nome categoria è hardcoded perchè nell'xml non sono presenti risultati
     // per tutte le categorie ma solo per una. (nella realtà si andrebbe a prendere il nome della categoria in questione)
-    final uri = await Uri.https("", "/", {"class": "Men Elite"});
+
+    final uri = await Uri.https("nsx648bfk1.execute-api.us-east-1.amazonaws.com", "/gridlist", {"id": "StartList", "class": "Men Elite"});
 
     final response = await http.get(uri);
 
