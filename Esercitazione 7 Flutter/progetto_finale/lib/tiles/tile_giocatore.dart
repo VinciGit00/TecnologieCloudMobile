@@ -33,12 +33,15 @@ class _TileGiocatoreState extends State<TileGiocatore> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Nome Giocatore
             Text(
               widget.model.nomeGiocatore!,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
             ),
-
             Row(
               children: [
                 Expanded(
@@ -90,15 +93,6 @@ class _TileGiocatoreState extends State<TileGiocatore> {
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ),
-
-                      // Time
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          "Time: ${widget.model.time}",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -124,6 +118,26 @@ class _TileGiocatoreState extends State<TileGiocatore> {
                       ],
                     ),
                   ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                // Time
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    "Time: ${widget.model.time}",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ),
+
+                Spacer(),
+
+                // Posizione
+                Text(
+                  "#" + widget.model.rank.toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                 )
               ],
             ),

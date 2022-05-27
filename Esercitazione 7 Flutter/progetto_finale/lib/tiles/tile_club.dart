@@ -24,7 +24,7 @@ class _TileClubState extends State<TileClub> {
             idGara: widget.idGara,
             title: widget.model.nomeClub,
             isCategoria: false,
-            id: widget.model.idClub,
+            id: widget.model.nomeClub,
           ),
         ),
       ),

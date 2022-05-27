@@ -153,7 +153,7 @@ class LambdaFunctions {
     }
 
     final response = await http.get(uri);
-
+    print(id);
     print(response.body);
     print(response.statusCode);
 

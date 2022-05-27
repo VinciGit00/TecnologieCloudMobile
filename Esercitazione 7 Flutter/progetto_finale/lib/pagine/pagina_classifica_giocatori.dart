@@ -35,45 +35,43 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
 
-        // Classifica Giocatori
-        body: FutureBuilder<List<TileGiocatoreModel>>(
-          future: LambdaFunctions().listResults(widget.idGara, widget.id, widget.isCategoria),
-          builder: (context, asyncsnapshot) {
-            if (asyncsnapshot.connectionState == ConnectionState.done) {
-              if (asyncsnapshot.hasData) {
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    setState(() {});
+      // Classifica Giocatori
+      body: FutureBuilder<List<TileGiocatoreModel>>(
+        future: LambdaFunctions().listResults(widget.idGara, widget.id, widget.isCategoria),
+        builder: (context, asyncsnapshot) {
+          if (asyncsnapshot.connectionState == ConnectionState.done) {
+            if (asyncsnapshot.hasData) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  setState(() {});
+                },
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  itemCount: asyncsnapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    return TileGiocatore(
+                      model: asyncsnapshot.data![index],
+                      isCategoria: widget.isCategoria,
+                    );
                   },
-                  child: ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    itemCount: asyncsnapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      return TileGiocatore(
-                        model: asyncsnapshot.data![index],
-                        isCategoria: widget.isCategoria,
-                      );
-                    },
-                  ),
-                );
-              }
-              return Center(
-                child: Text("Nessun Risultato Trovato"),
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
+                ),
               );
             }
-          },
-        ),
+            return Center(
+              child: Text("Nessun Risultato Trovato"),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
