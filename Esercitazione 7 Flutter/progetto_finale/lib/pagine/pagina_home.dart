@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progetto_finale/logica/lambda_functions.dart';
 import 'package:progetto_finale/models/tile_gara_model.dart';
-import 'package:progetto_finale/widgets/bottom_bar.dart';
-import '../elementiDrawer/get.dart';
-import '../elementiDrawer/post.dart';
 import '../tiles/tile_gara.dart';
 
 /// Pagina principale iniziale.
@@ -21,57 +18,29 @@ class _PaginaHomeState extends State<PaginaHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /// APP BAR
       appBar: AppBar(
         title: const Text("Lista gare"),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const SizedBox(
-              height: 44,
-            ),
-            ListTile(
-              title: const Text('Post'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => postPage(),
-                  ),
-                );
-              },
-            ),
-            const Divider(
-              color: Colors.white,
-            ),
-            ListTile(
-              title: const Text('Get'),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => GetPage()));
-              },
-            ),
-          ],
-        ),
-      ),
-
-      /// BODY
       body: FutureBuilder<List<TileGaraModel>>(
         future: LambdaFunctions().listraces(),
         builder: (context, asyncsnapshot) {
           if (asyncsnapshot.connectionState == ConnectionState.done) {
             if (asyncsnapshot.hasData) {
               return RefreshIndicator(
-                onRefresh: () => Future.delayed(
-                  const Duration(seconds: 1),
-                ),
+                // Quando eseguo refresh pagina, eseguo query che carica nuovi risultati e li visualizzo
+                // I nuovi risultati verranno visualizzati in giallo. Rimarranno in giallo fino al refresh successivo
+                onRefresh: () async {
+                  setState(() {});
+                },
                 child: ListView.builder(
+                  padding: const EdgeInsets.only(bottom: 10.0),
                   itemCount: asyncsnapshot.data!.length,
-                  itemBuilder: (context, index) => TileGara(
-                    model: asyncsnapshot.data![index],
-                  ),
+                  itemBuilder: (context, index) {
+                    return TileGara(
+                      model: asyncsnapshot.data![index],
+                    );
+                  },
                 ),
               );
             }
@@ -85,8 +54,6 @@ class _PaginaHomeState extends State<PaginaHome> {
           }
         },
       ),
-
-      bottomNavigationBar: CustomBottomBar(),
     );
   }
 }

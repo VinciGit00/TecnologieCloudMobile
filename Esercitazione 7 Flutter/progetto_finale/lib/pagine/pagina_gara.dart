@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:progetto_finale/logica/lambda_functions.dart';
 import 'package:progetto_finale/models/tile_categoria_model.dart';
 import 'package:progetto_finale/models/tile_club_model.dart';
-import 'package:progetto_finale/widgets/bottom_bar.dart';
 import '../tiles/tile_categoria.dart';
 import '../tiles/tile_club.dart';
 
 /// Pagina associata a ciascuna gara.
 ///
 /// Contiene una tabbar che permette di scegliere tra la visualizzazione della lista delle categorie
-/// per quella gara o dei club che partecipano a quella gara.
+/// o dei club che partecipano a quella gara.
 ///
 class PaginaGara extends StatefulWidget {
   PaginaGara({Key? key, required this.nomeGara, required this.idGara})
@@ -54,11 +53,14 @@ class _PaginaGaraState extends State<PaginaGara> {
                         const Duration(seconds: 1),
                       ),
                       child: ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 10.0),
                         itemCount: asyncsnapshot.data!.length,
-                        itemBuilder: (context, index) => TileCategoria(
-                          idGara: widget.idGara,
-                          model: asyncsnapshot.data![index],
-                        ),
+                        itemBuilder: (context, index) {
+                          return TileCategoria(
+                            model: asyncsnapshot.data![index],
+                            idGara: widget.idGara,
+                          );
+                        },
                       ),
                     );
                   }
@@ -80,15 +82,18 @@ class _PaginaGaraState extends State<PaginaGara> {
                 if (asyncsnapshot.connectionState == ConnectionState.done) {
                   if (asyncsnapshot.hasData) {
                     return RefreshIndicator(
-                      onRefresh: () => Future.delayed(
-                        const Duration(seconds: 1),
-                      ),
+                      onRefresh: () async {
+                        setState(() {});
+                      },
                       child: ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 10.0),
                         itemCount: asyncsnapshot.data!.length,
-                        itemBuilder: (context, index) => TileClub(
-                          idGara: widget.idGara,
-                          model: asyncsnapshot.data![index],
-                        ),
+                        itemBuilder: (context, index) {
+                          return TileClub(
+                            model: asyncsnapshot.data![index],
+                            idGara: widget.idGara,
+                          );
+                        },
                       ),
                     );
                   }
@@ -104,7 +109,6 @@ class _PaginaGaraState extends State<PaginaGara> {
             ),
           ],
         ),
-        bottomNavigationBar: CustomBottomBar(),
       ),
     );
   }
