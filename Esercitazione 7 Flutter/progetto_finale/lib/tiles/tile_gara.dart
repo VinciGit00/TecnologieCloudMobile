@@ -6,7 +6,6 @@ import '../models/tile_gara_model.dart';
 
 class TileGara extends StatefulWidget {
   TileGara({Key? key, required this.model}) : super(key: key);
-
   final TileGaraModel model;
 
   @override
@@ -28,9 +27,10 @@ class _TileGaraState extends State<TileGara> {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.all(5),
         margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+        padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
+          color: widget.model.isNew ? Colors.yellow : Colors.white,
           border: Border.all(
             color: Theme.of(context).primaryColor,
             width: 4,
@@ -60,8 +60,7 @@ class _TileGaraState extends State<TileGara> {
                       children: [
                         Text(
                           "${widget.model.data},",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ],
                     ),
@@ -72,8 +71,7 @@ class _TileGaraState extends State<TileGara> {
                     children: [
                       Text(
                         widget.model.ora,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                     ],
                   ),
