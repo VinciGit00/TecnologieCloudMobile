@@ -27,7 +27,8 @@ class _PaginaGaraState extends State<PaginaGara> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.nomeGara),
-          bottom: TabBar(
+          backgroundColor: Theme.of(context).primaryColor,
+          bottom: const TabBar(
             tabs: [
               Tab(
                 text: "Categoria",
