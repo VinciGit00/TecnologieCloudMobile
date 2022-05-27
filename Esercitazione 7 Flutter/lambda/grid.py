@@ -10,12 +10,12 @@ def lambda_handler(event, context):
         bucket = "bucketgare"
         key = event['queryStringParameters']['id']
         key = key+".xml"
+        ClassName = event['queryStringParameters']['class']
         
         obj = s3.Object(bucket, key)
         response = obj.get()['Body'].read()
         
         root = ET.fromstring(response)
-        root = root.getroot()
         _ns = {'':'http://www.orienteering.org/datastandard/3.0'}
         xpath_exp = './/ClassStart/Class[Name="' + ClassName + '"]/../PersonStart'
         xpath_query = root.findall(xpath_exp, _ns)
