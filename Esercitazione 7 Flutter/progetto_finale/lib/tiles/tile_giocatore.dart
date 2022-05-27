@@ -99,8 +99,8 @@ class _TileGiocatoreState extends State<TileGiocatore> {
 
                 // Maglietta
                 Container(
-                  height: 150,
-                  width: 150,
+                  height: 120,
+                  width: 120,
                   margin: EdgeInsets.only(right: 20),
                   child: FittedBox(
                     fit: BoxFit.fill,

@@ -18,12 +18,15 @@ class LambdaFunctions {
       Uri.parse("https://da9s2h285g.execute-api.us-east-1.amazonaws.com/test/list_races"),
     );
 
+    print(response.body);
+
     if (response.statusCode == 200) {
       List<dynamic> listaGareJson = jsonDecode(response.body)["result"];
 
       // controllo se è il primo fetch che faccio per quella lista
       var isListaGareOldEmpty = listaGareOld.isEmpty;
       for (Map<String, dynamic> i in listaGareJson) {
+        print(i);
         var model = TileGaraModel.fromJson(i);
         listaGare.add(model);
 
@@ -55,6 +58,8 @@ class LambdaFunctions {
     var uri = Uri.https("v5fiq86rb3.execute-api.us-east-1.amazonaws.com", "/list_classes", {'id': idGara});
 
     final response = await http.get(uri);
+
+    print(response.body);
 
     if (response.statusCode == 200) {
       Map<String, dynamic>? categoriaJson = jsonDecode(response.body);

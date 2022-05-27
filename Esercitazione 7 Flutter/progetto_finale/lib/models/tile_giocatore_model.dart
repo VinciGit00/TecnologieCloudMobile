@@ -41,7 +41,7 @@ class TileGiocatoreModel {
       score: json["score"],
       time: json["time"],
       timeBehind: null,
-      nazione: json["nat"],
+      nazione: json["country"],
       numeroMaglia: json["bib"],
       rank: json["position"],
       isNew: isNew,

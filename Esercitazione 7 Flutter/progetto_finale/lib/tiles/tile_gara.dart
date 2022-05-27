@@ -52,30 +52,22 @@ class _TileGaraState extends State<TileGara> {
             // Data
             Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Row(
-                      children: [
-                        Text(
-                          "${widget.model.data},",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
-                      ],
-                    ),
-                  ),
+              child: Text(
+                "Data e Ora di partenza: \t${widget.model.data}, \t${widget.model.ora}",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+            ),
 
-                  // Orario
-                  Row(
-                    children: [
-                      Text(
-                        widget.model.ora,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ],
-                  ),
-                ],
+            // Luogo
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                "Luogo di Partenza: \t ${widget.model.luogo}",
+                maxLines: 3,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
               ),
             ),
 
