@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:progetto_finale/main.dart';
 import 'package:progetto_finale/models/tile_giocatore_model.dart';
+import 'package:progetto_finale/models/tile_griglia_partenza.dart';
 import 'package:progetto_finale/tiles/tile_giocatore.dart';
+import 'package:progetto_finale/tiles/tile_griglia_partenza.dart';
 import '../logica/lambda_functions.dart';
 
 /// Questa pagina mostra una classifica dei giocatori.
@@ -35,43 +37,93 @@ class _PaginaClassificaGiocatori extends State<PaginaClassificaGiocatori> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-
-      // Classifica Giocatori
-      body: FutureBuilder<List<TileGiocatoreModel>>(
-        future: LambdaFunctions().listResults(widget.idGara, widget.id, widget.isCategoria),
-        builder: (context, asyncsnapshot) {
-          if (asyncsnapshot.connectionState == ConnectionState.done) {
-            if (asyncsnapshot.hasData) {
-              return RefreshIndicator(
-                onRefresh: () async {
-                  setState(() {});
-                },
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  itemCount: asyncsnapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return TileGiocatore(
-                      model: asyncsnapshot.data![index],
-                      isCategoria: widget.isCategoria,
-                    );
-                  },
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.id),
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: "Classifica",
+              ),
+              Tab(
+                child: Text(
+                  "Griglia \nDi Partenza",
+                  textAlign: TextAlign.center,
                 ),
-              );
-            }
-            return Center(
-              child: Text("Nessun Risultato Trovato"),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+              )
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            // TAB CLASSIFICA
+            FutureBuilder<List<TileGiocatoreModel>>(
+              future: LambdaFunctions().listResults(widget.idGara, widget.id, widget.isCategoria),
+              builder: (context, asyncsnapshot) {
+                if (asyncsnapshot.connectionState == ConnectionState.done) {
+                  if (asyncsnapshot.hasData) {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        setState(() {});
+                      },
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        itemCount: asyncsnapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return TileGiocatore(
+                            model: asyncsnapshot.data![index],
+                            isCategoria: widget.isCategoria,
+                          );
+                        },
+                      ),
+                    );
+                  }
+                  return Center(
+                    child: Text("Nessun Risultato Trovato"),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+
+            // TAB GRIGLIA DI PARTENZA
+            FutureBuilder<List<TileGrigliaPartenzaModel>>(
+              future: LambdaFunctions().listaGrigliaPartenza(widget.idGara),
+              builder: (context, asyncsnapshot) {
+                if (asyncsnapshot.connectionState == ConnectionState.done) {
+                  if (asyncsnapshot.hasData) {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        setState(() {});
+                      },
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        itemCount: asyncsnapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return TileGrigliaPartenza(
+                            model: asyncsnapshot.data![index],
+                          );
+                        },
+                      ),
+                    );
+                  }
+                  return Center(
+                    child: Text("Nessun Risultato Trovato"),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

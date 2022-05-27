@@ -3,8 +3,8 @@ import 'package:progetto_finale/models/tile_categoria_model.dart';
 import 'package:progetto_finale/models/tile_gara_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:progetto_finale/models/tile_giocatore_model.dart';
+import 'package:progetto_finale/models/tile_griglia_partenza.dart';
 import 'dart:convert';
-
 import '../models/tile_club_model.dart';
 
 class LambdaFunctions {
@@ -192,6 +192,41 @@ class LambdaFunctions {
       return listaRisultati;
     } else {
       print("ERRORE GET LIST RESULTS");
+      return [];
+    }
+  }
+
+  // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /// Funzione che ritorna la griglia di partenza per una specifica categoria
+  ///
+  Future<List<TileGrigliaPartenzaModel>> listaGrigliaPartenza(String idCategoria) async {
+    List<TileGrigliaPartenzaModel> listaGrigliaPartenza = [];
+    // In questo caso il nome categoria è hardcoded perchè nell'xml non sono presenti risultati
+    // per tutte le categorie ma solo per una. (nella realtà si andrebbe a prendere il nome della categoria in questione)
+    final uri = await Uri.https("", "/", {"class": "Men Elite"});
+
+    final response = await http.get(uri);
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic>? grigliaPartenzaJson = jsonDecode(response.body);
+
+      var keyList = grigliaPartenzaJson!.keys.toList();
+
+      keyList.forEach((element) {
+        // eseguo dei controlli sul numero di chiavi del json
+        if (grigliaPartenzaJson[element] == null) {
+          return;
+        }
+
+        var model = TileGrigliaPartenzaModel.fromJson(grigliaPartenzaJson[element]!);
+        listaGrigliaPartenza.add(model);
+      });
+
+      return listaGrigliaPartenza;
+    } else {
+      print("ERRORE GET LIST CLUBS");
       return [];
     }
   }

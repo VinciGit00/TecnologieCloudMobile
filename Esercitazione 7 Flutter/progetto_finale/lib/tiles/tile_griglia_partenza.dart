@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
+import '../models/tile_griglia_partenza.dart';
 
-import '../models/tile_giocatore_model.dart';
+class TileGrigliaPartenza extends StatefulWidget {
+  TileGrigliaPartenza({Key? key, required this.model}) : super(key: key);
 
-class TileGiocatore extends StatefulWidget {
-  TileGiocatore({Key? key, required this.model, required this.isCategoria}) : super(key: key);
-
-  final TileGiocatoreModel model;
-  final bool isCategoria;
+  final TileGrigliaPartenzaModel model;
 
   @override
-  State<TileGiocatore> createState() => _TileGiocatoreState();
+  State<TileGrigliaPartenza> createState() => _TileGrigliaPartenzaState();
 }
 
-class _TileGiocatoreState extends State<TileGiocatore> {
+class _TileGrigliaPartenzaState extends State<TileGrigliaPartenza> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.only(top: 20, left: 20, right: 20),
       decoration: BoxDecoration(
-        color: widget.model.isNew ? Colors.yellow : Colors.white,
+        color: Colors.white,
         border: Border.all(
           color: Theme.of(context).primaryColor,
           width: 4,
@@ -33,7 +31,7 @@ class _TileGiocatoreState extends State<TileGiocatore> {
         children: [
           // Nome Giocatore
           Text(
-            widget.model.nomeGiocatore!,
+            widget.model.nomeGiocatore,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             style: TextStyle(
@@ -48,29 +46,11 @@ class _TileGiocatoreState extends State<TileGiocatore> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // NomeClub / Categoria
+                    // Nome Club
                     Padding(
                       padding: const EdgeInsets.only(right: 10, top: 10),
                       child: Text(
-                        widget.isCategoria ? "Club: ${widget.model.nomeClub}" : "Categoria: ${widget.model.nomeCategoria}",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ),
-
-                    // ID
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        "ID: ${widget.model.idGiocatore}",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ),
-
-                    // Status
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        "Status: ${widget.model.status}",
+                        "Club: ${widget.model.club}",
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                     ),
@@ -80,15 +60,6 @@ class _TileGiocatoreState extends State<TileGiocatore> {
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(
                         "Nazione: ${widget.model.nazione}",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ),
-
-                    // Score
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        "Score: ${widget.model.score}",
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                     ),
@@ -126,18 +97,10 @@ class _TileGiocatoreState extends State<TileGiocatore> {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  "Time: ${widget.model.time}",
+                  "Time: ${widget.model.istantePartenza}",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ),
-
-              Spacer(),
-
-              // Posizione
-              Text(
-                "#" + widget.model.rank.toString(),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-              )
             ],
           ),
         ],

@@ -53,7 +53,7 @@ class _TileGaraState extends State<TileGara> {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Text(
-                "Data e Ora di partenza: \t${widget.model.data}, \t${widget.model.ora}",
+                "${widget.model.data}, \t${widget.model.ora}",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
             ),
@@ -62,7 +62,7 @@ class _TileGaraState extends State<TileGara> {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Text(
-                "Luogo di Partenza: \t ${widget.model.luogo}",
+                "${widget.model.luogo}",
                 maxLines: 3,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,

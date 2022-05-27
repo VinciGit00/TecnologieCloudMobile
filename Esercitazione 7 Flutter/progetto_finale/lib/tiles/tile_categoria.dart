@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progetto_finale/pagine/pagina_classifica_giocatori.dart';
-
 import '../models/tile_categoria_model.dart';
 
 class TileCategoria extends StatefulWidget {
@@ -60,7 +59,7 @@ class _TileCategoriaState extends State<TileCategoria> {
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
-                      "Dislivello: ${widget.model.dislivello}",
+                      "Dislivello: ${widget.model.dislivello} m",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
@@ -73,7 +72,7 @@ class _TileCategoriaState extends State<TileCategoria> {
                     child: Row(
                       children: [
                         Text(
-                          "Distanza: ${widget.model.distanza}",
+                          "Distanza: ${widget.model.distanza} m",
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ],

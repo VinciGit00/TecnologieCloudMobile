@@ -27,14 +27,14 @@ class _PaginaGaraState extends State<PaginaGara> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.nomeGara),
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
               Tab(
                 text: "Categoria",
               ),
               Tab(
                 text: "Club",
-              )
+              ),
             ],
           ),
         ),
